@@ -8,10 +8,10 @@ namespace HNZ.TieredTechBlocks
     public sealed class TierForge2x : TierForgeBase
     {
         protected override int ForgeMod => Config.Instance.Common.ForgeMod;
-        protected override float LifeSpan => Config.Instance.Common.LifeSpanMinutes;
+        protected override int MaxForgeCount => Config.Instance.Common.MaxForgeCount;
         protected override float GpsRadius => Config.Instance.Common.GpsRadius;
 
-        protected override bool TryForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder)
+        protected override bool CanForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder)
         {
             builder = DefinitionUtils.TechComp2xBuilder;
             return DefinitionUtils.IsTech2xSource(itemType);

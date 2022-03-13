@@ -1,9 +1,9 @@
 ﻿using System;
-using HNZ.Utils;
 using HNZ.Utils.Communications.Gps;
 using HNZ.Utils.Logging;
 using HNZ.Utils.Pools;
 using Sandbox.Game.Entities;
+using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using VRage.Game;
 using VRage.Game.Components;
@@ -20,12 +20,8 @@ namespace HNZ.TieredTechBlocks
     {
         static readonly Logger Log = LoggerManager.Create(nameof(TierForgeBase));
 
-        CharacterToPlayerLookup _playerLookup;
-        DateTime _startTime;
-        string _gpsName;
-
         long IGpsEntity.Id => Entity.EntityId;
-        string IGpsEntity.Name => _gpsName;
+        string IGpsEntity.Name => Block.DisplayNameText;
         string IGpsEntity.Description => "Forge blocks allow you to convert Tiered Tech Source components to Tiered Tech components.";
         Vector3D IGpsEntity.Position => Entity.GetPosition();
         Color IGpsEntity.Color => Color.Orange;
@@ -35,20 +31,16 @@ namespace HNZ.TieredTechBlocks
         IMyCargoContainer Cargo => (IMyCargoContainer)Entity;
 
         protected abstract int ForgeMod { get; }
-        protected abstract float LifeSpan { get; }
+        protected abstract int MaxForgeCount { get; }
         protected abstract float GpsRadius { get; }
 
-        protected abstract bool TryForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder);
+        protected abstract bool CanForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder);
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             if (!MyAPIGateway.Session.IsServer) return;
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_100TH_FRAME;
-
-            _playerLookup = new CharacterToPlayerLookup();
-            _startTime = DateTime.UtcNow;
-            _gpsName = "";
 
             Core.Instance.OnForgeOpened(this);
         }
@@ -57,29 +49,12 @@ namespace HNZ.TieredTechBlocks
         {
             if (!MyAPIGateway.Session.IsServer) return;
 
-            _playerLookup.Clear();
-
             Core.Instance.OnForgeClosed(this);
         }
 
         public override void UpdateAfterSimulation()
         {
             if (!MyAPIGateway.Session.IsServer) return;
-
-            // do countdown
-            var pastTime = DateTime.UtcNow - _startTime;
-            var remainingTime = TimeSpan.FromMinutes(LifeSpan) - pastTime;
-
-            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
-            {
-                _gpsName = $"{Block.DisplayNameText} ({LangUtils.HoursToString(remainingTime.TotalHours)})";
-            }
-
-            if (remainingTime.TotalMinutes <= 0)
-            {
-                Destroy();
-                return;
-            }
 
             if (!Block.IsWorking) return;
 
@@ -105,26 +80,55 @@ namespace HNZ.TieredTechBlocks
         {
             var items = ListPool<MyInventoryItem>.Create();
 
+            var reachedMaxForgeCount = false;
             var inventory = Cargo.GetInventory(0);
             inventory.GetItems(items);
             foreach (var item in items)
             {
                 MyObjectBuilder_PhysicalObject builder;
-                if (TryForge(item.Type, out builder))
+                if (CanForge(item.Type, out builder))
                 {
                     inventory.RemoveItems(item.ItemId, 1);
                     inventory.AddItems(1, DefinitionUtils.TechComp8xBuilder);
+                    reachedMaxForgeCount = IncrementForgeCount() >= MaxForgeCount;
+                    break;
                 }
+            }
+
+            if (reachedMaxForgeCount)
+            {
+                Destroy();
             }
 
             ListPool<MyInventoryItem>.Release(items);
         }
 
+        int IncrementForgeCount()
+        {
+            if (Entity.Storage == null)
+            {
+                Entity.Storage = new MyModStorageComponent();
+            }
+
+            var guid = Guid.Parse("78441755-F0CC-4005-AA58-C736864591E1");
+
+            string forgeCountStr;
+            Entity.Storage.TryGetValue(guid, out forgeCountStr);
+
+            int forgeCount;
+            int.TryParse(forgeCountStr ?? "", out forgeCount);
+
+            forgeCount += 1;
+            Entity.Storage.SetValue(guid, forgeCount.ToString("0"));
+
+            return forgeCount;
+        }
+
         public void BeforeDamage(ref MyDamageInformation info)
         {
-            if (LifeSpan >= 0)
+            if (MaxForgeCount >= 0)
             {
-                Log.Info($"damage: {info.Amount}, lifespan: {LifeSpan}");
+                Log.Info($"damage: {info.Amount}, lifespan: {MaxForgeCount}");
                 info.Amount = 0;
             }
         }

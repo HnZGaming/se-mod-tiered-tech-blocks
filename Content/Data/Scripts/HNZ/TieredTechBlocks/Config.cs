@@ -41,7 +41,7 @@ namespace HNZ.TieredTechBlocks
                 MaxAmount = 40,
                 ForgeMod = 100,
                 GpsRadius = 10,
-                LifeSpanMinutes = 30,
+                MaxForgeCount = 90,
             },
             Rare = new TechProperty
             {
@@ -50,7 +50,7 @@ namespace HNZ.TieredTechBlocks
                 MaxAmount = 20,
                 ForgeMod = 200,
                 GpsRadius = 10,
-                LifeSpanMinutes = 30,
+                MaxForgeCount = 60,
             },
             Exotic = new TechProperty
             {
@@ -59,7 +59,7 @@ namespace HNZ.TieredTechBlocks
                 MaxAmount = 10,
                 ForgeMod = 300,
                 GpsRadius = -1,
-                LifeSpanMinutes = 60,
+                MaxForgeCount = 30,
             },
             ExcludeGridNames = new List<string>
             {
@@ -107,10 +107,9 @@ namespace HNZ.TieredTechBlocks
         public int GpsRadius;
 
         // by minutes
-        //  0 -> infinite lifespan and invincible
-        // -1 -> can be destroyed
+        //  0 -> infinite
         [XmlAttribute]
-        public float LifeSpanMinutes;
+        public int MaxForgeCount;
     }
 
     [Serializable]

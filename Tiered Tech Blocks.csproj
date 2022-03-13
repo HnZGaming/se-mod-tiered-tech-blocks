@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Data\Definitions\CubeBlocks_TierForge.sbc" />
+    <Content Include="Content\Data\Definitions\ModStorageComponents.sbc" />
     <Content Include="Content\Overlays\2x.png" />
     <Content Include="Content\Overlays\4x.png" />
     <Content Include="Content\Overlays\8x.png" />
