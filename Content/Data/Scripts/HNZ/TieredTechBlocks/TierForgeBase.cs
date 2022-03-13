@@ -24,7 +24,7 @@ namespace HNZ.TieredTechBlocks
         static readonly Guid StorageGuid = Guid.Parse("78441755-F0CC-4005-AA58-C736864591E1");
 
         long IGpsEntity.Id => Entity.EntityId;
-        string IGpsEntity.Name => Block.DisplayNameText;
+        string IGpsEntity.Name => $"{Block.DisplayNameText} ({MaxForgeCount - ForgeCount} left)";
         string IGpsEntity.Description => "Forge blocks allow you to convert Tiered Tech Source components to Tiered Tech components.";
         Vector3D IGpsEntity.Position => Entity.GetPosition();
         Color IGpsEntity.Color => Color.Orange;

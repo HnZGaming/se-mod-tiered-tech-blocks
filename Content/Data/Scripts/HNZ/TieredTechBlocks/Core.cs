@@ -87,6 +87,7 @@ namespace HNZ.TieredTechBlocks
         {
             _protobufModule.Update();
             _commandModule.Update();
+            _gpsModule.Update();
 
             if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
             {
