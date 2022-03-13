@@ -42,5 +42,18 @@
         <string>ShipWelder/SmallShipWelder8x</string>
       </ItemIds>
     </Category>
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId/>
+      </Id>
+      <DisplayName>Tier Forges</DisplayName>
+      <Name>TierForges</Name>
+      <ItemIds>
+        <string>CargoContainer/TierForge2x</string>
+        <string>CargoContainer/TierForge4x</string>
+        <string>CargoContainer/TierForge8x</string>
+      </ItemIds>
+    </Category>
   </CategoryClasses>
 </Definitions>

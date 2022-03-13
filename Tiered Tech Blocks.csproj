@@ -6,12 +6,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{78441755-F0CC-4005-AA58-C736864591E1}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Tiered_Tech_Blocks</RootNamespace>
     <AssemblyName>Tiered Tech Blocks</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,67 +33,49 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Content\Data\Scripts\TieredTechBlocks\CargoUpdater.cs" />
-    <Compile Include="Content\Data\Scripts\TieredTechBlocks\Config.cs" />
-    <Compile Include="Content\Data\Scripts\TieredTechBlocks\Core.cs" />
-    <Compile Include="Content\Data\Scripts\TieredTechBlocks\MoreLoot.cs" />
-    <Compile Include="Content\Data\Scripts\TieredTechBlocks\MyConfig.cs" />
-    <Compile Include="Content\Data\Scripts\TieredTechBlocks\UpgradeHandler.cs" />
     <None Include="App.config" />
+    <None Include="Content\Data\Definitions\BlockCategories.sbc" />
+    <None Include="Content\Data\Definitions\BlockVariantGroups.sbc" />
+    <None Include="Content\Data\Definitions\BlueprintClasses.sbc" />
+    <None Include="Content\Data\Definitions\Blueprints.sbc" />
+    <None Include="Content\Data\Definitions\Components.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_Assembler.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_AtmosphericThruster.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_AtmosphericThrusterSciFi.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_Battery.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_Beacon.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_CargoContainerLarge.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_CargoContainerMedium.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_CargoContainerSmall.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_Detector.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_Drill.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_Grinder.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_Gyroscope.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_HydrogenEngine.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_HydrogenTank.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_HydrogenThruster.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_IndustrialPack.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_IonThruster.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_IonThrusterSciFi.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_JumpDrive.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_OxygenFarm.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_OxygenGenerator.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_OxygenTank.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_Reactor.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_Refinery.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_SafeZone.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_SolarPanel.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_Spotlight.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_StoneIncinerator.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_SurvivalKit.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_Warfare2.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_Welder.sbc" />
+    <None Include="Content\Data\Definitions\CubeBlocks_WindTurbine.sbc" />
+    <None Include="Content\Data\Definitions\EntityContainers.sbc" />
+    <None Include="Content\Data\Definitions\ResearchBlocks.sbc" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Data\Definitions\BlockCategories.sbc" />
-    <Content Include="Content\Data\Definitions\BlockVariantGroups.sbc" />
-    <Content Include="Content\Data\Definitions\BlueprintClasses.sbc" />
-    <Content Include="Content\Data\Definitions\Blueprints.sbc" />
-    <Content Include="Content\Data\Definitions\Components.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_Assembler.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_AtmosphericThruster.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_AtmosphericThrusterSciFi.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_Battery.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_Beacon.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_CargoContainerLarge.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_CargoContainerMedium.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_CargoContainerSmall.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_Detector.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_Drill.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_Grinder.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_Gyroscope.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_HydrogenEngine.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_HydrogenTank.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_HydrogenThruster.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_IndustrialPack.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_IonThruster.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_IonThrusterSciFi.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_JumpDrive.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_OxygenFarm.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_OxygenGenerator.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_OxygenTank.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_Reactor.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_Refinery.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_SafeZone.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_SolarPanel.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_Spotlight.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_StoneIncinerator.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_SurvivalKit.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_Warfare2.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_Welder.sbc" />
-    <Content Include="Content\Data\Definitions\CubeBlocks_WindTurbine.sbc" />
-    <Content Include="Content\Data\Definitions\EntityContainers.sbc" />
-    <Content Include="Content\Data\Definitions\FactionTypes_Economy.sbc" />
-    <Content Include="Content\Data\Definitions\ResearchBlocks.sbc" />
-    <Content Include="Content\metadata.mod" />
-    <Content Include="Content\Models\Cubes\JumpDrive\JumpDrive.mwm" />
-    <Content Include="Content\Models\Cubes\JumpDrive\JumpDriveConstruction_1.mwm" />
-    <Content Include="Content\Models\Cubes\JumpDrive\JumpDriveConstruction_1_LOD1.mwm" />
-    <Content Include="Content\Models\Cubes\JumpDrive\JumpDriveConstruction_2.mwm" />
-    <Content Include="Content\Models\Cubes\JumpDrive\JumpDriveConstruction_2_LOD1.mwm" />
-    <Content Include="Content\Models\Cubes\JumpDrive\JumpDriveConstruction_3.mwm" />
-    <Content Include="Content\Models\Cubes\JumpDrive\JumpDriveConstruction_3_LOD1.mwm" />
-    <Content Include="Content\Models\Cubes\JumpDrive\JumpDrive_LOD1.mwm" />
-    <Content Include="Content\Models\Cubes\JumpDrive\JumpDrive_LOD2.mwm" />
-    <Content Include="Content\Models\Cubes\JumpDrive\JumpDrive_LOD3.mwm" />
-    <Content Include="Content\modinfo.sbmi" />
+    <Content Include="Content\Data\Definitions\CubeBlocks_TierForge.sbc" />
     <Content Include="Content\Overlays\2x.png" />
     <Content Include="Content\Overlays\4x.png" />
     <Content Include="Content\Overlays\8x.png" />
@@ -189,9 +171,9 @@
     <Content Include="Content\Textures\LargeGridModularIonThrusterSmall2x.dds" />
     <Content Include="Content\Textures\LargeGridModularIonThrusterSmall4x.dds" />
     <Content Include="Content\Textures\LargeGridModularIonThrusterSmall8x.dds" />
-    <Content Include="Content\Textures\LargeHydrogenTankSmall2x.DDS" />
-    <Content Include="Content\Textures\LargeHydrogenTankSmall4x.DDS" />
-    <Content Include="Content\Textures\LargeHydrogenTankSmall8x.DDS" />
+    <Content Include="Content\Textures\LargeHydrogenTankSmall2x.dds" />
+    <Content Include="Content\Textures\LargeHydrogenTankSmall4x.dds" />
+    <Content Include="Content\Textures\LargeHydrogenTankSmall8x.dds" />
     <Content Include="Content\Textures\Large_AtmosphericThrusterLarge_SciFi2x.dds" />
     <Content Include="Content\Textures\Large_AtmosphericThrusterLarge_SciFi4x.dds" />
     <Content Include="Content\Textures\Large_AtmosphericThrusterLarge_SciFi8x.dds" />
@@ -403,9 +385,9 @@
     <Content Include="Content\Textures\SmallgridReactorReskinSmall2x.dds" />
     <Content Include="Content\Textures\SmallgridReactorReskinSmall4x.dds" />
     <Content Include="Content\Textures\SmallgridReactorReskinSmall8x.dds" />
-    <Content Include="Content\Textures\SmallHydrogenTankSmall2x.DDS" />
-    <Content Include="Content\Textures\SmallHydrogenTankSmall4x.DDS" />
-    <Content Include="Content\Textures\SmallHydrogenTankSmall8x.DDS" />
+    <Content Include="Content\Textures\SmallHydrogenTankSmall2x.dds" />
+    <Content Include="Content\Textures\SmallHydrogenTankSmall4x.dds" />
+    <Content Include="Content\Textures\SmallHydrogenTankSmall8x.dds" />
     <Content Include="Content\Textures\Small_AtmosphericThrusterLarge_SciFi2x.dds" />
     <Content Include="Content\Textures\Small_AtmosphericThrusterLarge_SciFi4x.dds" />
     <Content Include="Content\Textures\Small_AtmosphericThrusterLarge_SciFi8x.dds" />
@@ -433,8 +415,11 @@
     <Content Include="Content\Textures\SurvivalKitSmall4x.dds" />
     <Content Include="Content\Textures\SurvivalKitSmall8x.dds" />
     <Content Include="Content\Textures\tech2x.dds" />
+    <Content Include="Content\Textures\tech2xsource.dds" />
     <Content Include="Content\Textures\tech4x.dds" />
+    <Content Include="Content\Textures\tech4xsource.dds" />
     <Content Include="Content\Textures\tech8x.dds" />
+    <Content Include="Content\Textures\tech8xSource.dds" />
     <Content Include="Content\Textures\techadmin.dds" />
     <Content Include="Content\Textures\techadmin.png" />
     <Content Include="Content\Textures\thrust2x.dds" />
@@ -451,100 +436,151 @@
     <Content Include="Content\Textures\WindTurbine2x.dds" />
     <Content Include="Content\Textures\WindTurbine4x.dds" />
     <Content Include="Content\Textures\WindTurbine8x.dds" />
-    <Content Include="Content\thumb.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="ProtoBuf.Net">
-      <HintPath>D:\GIT\se-tools\libs\ProtoBuf.Net.dll</HintPath>
+      <HintPath>..\Bin64\ProtoBuf.Net.dll</HintPath>
     </Reference>
     <Reference Include="ProtoBuf.Net.Core">
-      <HintPath>D:\GIT\se-tools\libs\ProtoBuf.Net.Core.dll</HintPath>
+      <HintPath>..\Bin64\ProtoBuf.Net.Core.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.Common">
-      <HintPath>D:\GIT\se-tools\libs\Sandbox.Common.dll</HintPath>
+      <HintPath>..\Bin64\Sandbox.Common.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.Game">
-      <HintPath>D:\GIT\se-tools\libs\Sandbox.Game.dll</HintPath>
+      <HintPath>..\Bin64\Sandbox.Game.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.Game.XmlSerializers">
-      <HintPath>D:\GIT\se-tools\libs\Sandbox.Game.XmlSerializers.dll</HintPath>
+      <HintPath>..\Bin64\Sandbox.Game.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.Graphics">
-      <HintPath>D:\GIT\se-tools\libs\Sandbox.Graphics.dll</HintPath>
+      <HintPath>..\Bin64\Sandbox.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.RenderDirect">
-      <HintPath>D:\GIT\se-tools\libs\Sandbox.RenderDirect.dll</HintPath>
+      <HintPath>..\Bin64\Sandbox.RenderDirect.dll</HintPath>
     </Reference>
     <Reference Include="SpaceEngineers.Game">
-      <HintPath>D:\GIT\se-tools\libs\SpaceEngineers.Game.dll</HintPath>
+      <HintPath>..\Bin64\SpaceEngineers.Game.dll</HintPath>
     </Reference>
     <Reference Include="SpaceEngineers.ObjectBuilders">
-      <HintPath>D:\GIT\se-tools\libs\SpaceEngineers.ObjectBuilders.dll</HintPath>
+      <HintPath>..\Bin64\SpaceEngineers.ObjectBuilders.dll</HintPath>
     </Reference>
     <Reference Include="SpaceEngineers.ObjectBuilders.XmlSerializers">
-      <HintPath>D:\GIT\se-tools\libs\SpaceEngineers.ObjectBuilders.XmlSerializers.dll</HintPath>
+      <HintPath>..\Bin64\SpaceEngineers.ObjectBuilders.XmlSerializers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml" />
     <Reference Include="VRage">
-      <HintPath>D:\GIT\se-tools\libs\VRage.dll</HintPath>
+      <HintPath>..\Bin64\VRage.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Ansel">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Ansel.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Ansel.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Audio">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Audio.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Audio.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Game">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Game.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Game.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Game.XmlSerializers">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Game.XmlSerializers.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Game.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Input">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Input.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Input.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Library">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Library.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Library.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Math">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Math.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Math.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Math.XmlSerializers">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Math.XmlSerializers.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Math.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Mod.Io">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Mod.Io.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Mod.Io.dll</HintPath>
     </Reference>
     <Reference Include="VRage.NativeAftermath">
-      <HintPath>D:\GIT\se-tools\libs\VRage.NativeAftermath.dll</HintPath>
+      <HintPath>..\Bin64\VRage.NativeAftermath.dll</HintPath>
     </Reference>
     <Reference Include="VRage.NativeWrapper">
-      <HintPath>D:\GIT\se-tools\libs\VRage.NativeWrapper.dll</HintPath>
+      <HintPath>..\Bin64\VRage.NativeWrapper.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Network">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Network.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Network.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Platform.Windows">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Platform.Windows.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Platform.Windows.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Render">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Render.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Render.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Render11">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Render11.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Render11.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Scripting">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Scripting.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Scripting.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Steam">
-      <HintPath>D:\GIT\se-tools\libs\VRage.Steam.dll</HintPath>
+      <HintPath>..\Bin64\VRage.Steam.dll</HintPath>
     </Reference>
     <Reference Include="VRage.UserInterface">
-      <HintPath>D:\GIT\se-tools\libs\VRage.UserInterface.dll</HintPath>
+      <HintPath>..\Bin64\VRage.UserInterface.dll</HintPath>
     </Reference>
     <Reference Include="VRage.XmlSerializers">
-      <HintPath>D:\GIT\se-tools\libs\VRage.XmlSerializers.dll</HintPath>
+      <HintPath>..\Bin64\VRage.XmlSerializers.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\CargoUpgradeHandler.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\Core.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\DefinitionUtils.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\MoreLoot.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\Config.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForge2x.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForge4x.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForge8x.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForgeBase.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\UpgradeHandler.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\AddRemoveObserver.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\BoundaryObserver.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\CharacterToPlayerLookup.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications.Gps\GpsEntityModule.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications.Gps\GpsModule.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications.Gps\GpsSource.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications.Gps\IGpsEntity.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications\Command.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications\CommandModule.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications\ICommandListener.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications\IProtobufListener.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications\ProtobufModule.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications\ProtobufUtils.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\ContentFile.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Disposable.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\GameUtils.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\JumpDriveSuppressor.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\LangUtils.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\LogConfig.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\Logger.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\LoggerManager.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\LoggingLevelConfig.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\MathUtils.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Pools\DictionaryPool.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Pools\ListPool.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\Pools\SetPool.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\SafeZoneSuppressor.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\SceneEntityObserver.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\SceneEntityTracker.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\SerializableDictionaryUtils.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\UpdateDiagnostics.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\UpdateSpanObserver.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
