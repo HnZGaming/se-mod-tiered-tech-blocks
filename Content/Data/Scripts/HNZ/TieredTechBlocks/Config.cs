@@ -110,6 +110,9 @@ namespace HNZ.TieredTechBlocks
         //  0 -> infinite
         [XmlAttribute]
         public int MaxForgeCount;
+
+        [XmlAttribute]
+        public bool Invincible;
     }
 
     [Serializable]
