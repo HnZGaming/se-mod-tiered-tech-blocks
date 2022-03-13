@@ -106,13 +106,8 @@ namespace HNZ.TieredTechBlocks
         static void BeforeDamage(object target, ref MyDamageInformation info)
         {
             var block = target as IMySlimBlock;
-            if (block == null) return;
-
-            TierForgeBase forge;
-            if (block.FatBlock.Components.TryGet(out forge))
-            {
-                forge.BeforeDamage(ref info);
-            }
+            var forge = block?.FatBlock?.GameLogic?.GetAs<TierForgeBase>();
+            forge?.BeforeDamage(ref info);
         }
 
         public void OnForgeOpened(TierForgeBase forge)

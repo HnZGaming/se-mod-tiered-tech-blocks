@@ -12,7 +12,6 @@ using VRage.Game.ModAPI.Ingame;
 using VRage.Game.ModAPI.Interfaces;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
-using VRage.Utils;
 using VRageMath;
 
 namespace HNZ.TieredTechBlocks
@@ -23,7 +22,6 @@ namespace HNZ.TieredTechBlocks
 
         CharacterToPlayerLookup _playerLookup;
         DateTime _startTime;
-        bool _pastFirstFrame;
         string _gpsName;
 
         long IGpsEntity.Id => Entity.EntityId;
@@ -39,7 +37,6 @@ namespace HNZ.TieredTechBlocks
         protected abstract int ForgeMod { get; }
         protected abstract float LifeSpan { get; }
         protected abstract float GpsRadius { get; }
-        protected abstract float DestroyOnSpawnChance { get; }
 
         protected abstract bool TryForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder);
 
@@ -68,17 +65,6 @@ namespace HNZ.TieredTechBlocks
         public override void UpdateAfterSimulation()
         {
             if (!MyAPIGateway.Session.IsServer) return;
-
-            if (LangUtils.RunOnce(ref _pastFirstFrame))
-            {
-                // fail to spawn
-                if (DestroyOnSpawnChance > MyUtils.GetRandomDouble(0, 1))
-                {
-                    Destroy();
-                    Log.Info($"forge destroying on spawn: {Block.DisplayNameText}");
-                    return;
-                }
-            }
 
             // do countdown
             var pastTime = DateTime.UtcNow - _startTime;
@@ -138,6 +124,7 @@ namespace HNZ.TieredTechBlocks
         {
             if (LifeSpan >= 0)
             {
+                Log.Info($"damage: {info.Amount}, lifespan: {LifeSpan}");
                 info.Amount = 0;
             }
         }

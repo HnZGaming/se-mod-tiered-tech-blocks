@@ -12,6 +12,9 @@ namespace HNZ.TieredTechBlocks
         public static Config Instance { get; set; }
 
         [XmlElement]
+        public bool AgreeToKeepThisModPrivate;
+
+        [XmlElement]
         public TechProperty Common;
 
         [XmlElement]
@@ -24,7 +27,7 @@ namespace HNZ.TieredTechBlocks
         public List<string> ExcludeGridNames;
 
         [XmlElement]
-        public bool AgreeToKeepThisModPrivate;
+        public List<CargoReplacement> CargoReplacements;
 
         [XmlElement]
         public List<LogConfig> LogConfigs;
@@ -37,7 +40,7 @@ namespace HNZ.TieredTechBlocks
                 MinAmount = 6,
                 MaxAmount = 40,
                 ForgeMod = 100,
-                GpsRadius = 10000,
+                GpsRadius = 10,
                 LifeSpanMinutes = 30,
             },
             Rare = new TechProperty
@@ -46,7 +49,7 @@ namespace HNZ.TieredTechBlocks
                 MinAmount = 3,
                 MaxAmount = 20,
                 ForgeMod = 200,
-                GpsRadius = 10000,
+                GpsRadius = 10,
                 LifeSpanMinutes = 30,
             },
             Exotic = new TechProperty
@@ -62,6 +65,15 @@ namespace HNZ.TieredTechBlocks
             {
                 "respawn",
             },
+            CargoReplacements = new List<CargoReplacement>
+            {
+                new CargoReplacement
+                {
+                    FactionTag = "PEAVER",
+                    Tier = 4,
+                    Chance = 0.2f,
+                },
+            },
             LogConfigs = new List<LogConfig>
             {
                 new LogConfig
@@ -76,31 +88,41 @@ namespace HNZ.TieredTechBlocks
     [Serializable]
     public class TechProperty
     {
-        [XmlElement]
+        [XmlAttribute]
         public float Chance;
 
-        [XmlElement]
+        [XmlAttribute]
         public int MinAmount;
 
-        [XmlElement]
+        [XmlAttribute]
         public int MaxAmount;
 
-        [XmlElement]
+        [XmlAttribute]
         public int ForgeMod;
 
         // by meters
         //  0 -> no gps
         // -1 -> infinite gps (all players)
-        [XmlElement]
+        [XmlAttribute]
         public int GpsRadius;
 
         // by minutes
         //  0 -> infinite lifespan and invincible
         // -1 -> can be destroyed
-        [XmlElement]
+        [XmlAttribute]
         public float LifeSpanMinutes;
+    }
 
-        [XmlElement]
-        public float DestroyOnSpawnChance;
+    [Serializable]
+    public class CargoReplacement
+    {
+        [XmlAttribute]
+        public string FactionTag;
+
+        [XmlAttribute]
+        public int Tier;
+
+        [XmlAttribute]
+        public float Chance;
     }
 }

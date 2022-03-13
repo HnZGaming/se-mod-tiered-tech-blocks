@@ -1,4 +1,5 @@
-﻿using Sandbox.Definitions;
+﻿using System;
+using Sandbox.Definitions;
 using VRage.Game;
 using VRage.Game.ModAPI.Ingame;
 using VRage.ObjectBuilders;
@@ -62,6 +63,17 @@ namespace HNZ.TieredTechBlocks
         public static bool IsTech8xSource(MyItemType itemType)
         {
             return itemType.TypeId == "MyObjectBuilder_Component" && itemType.SubtypeId == "Tech8xSource";
+        }
+
+        public static string ForgeBlockSubtypeName(int tier)
+        {
+            switch (tier)
+            {
+                case 2: return "TierForge2x";
+                case 4: return "TierForge4x";
+                case 8: return "TierForge8x";
+                default: throw new InvalidOperationException($"invalid tier: {tier}");
+            }
         }
     }
 }

@@ -10,7 +10,6 @@ namespace HNZ.TieredTechBlocks
         protected override int ForgeMod => Config.Instance.Exotic.ForgeMod;
         protected override float LifeSpan => Config.Instance.Exotic.LifeSpanMinutes;
         protected override float GpsRadius => Config.Instance.Exotic.GpsRadius;
-        protected override float DestroyOnSpawnChance => Config.Instance.Exotic.DestroyOnSpawnChance;
 
         protected override bool TryForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder)
         {
