@@ -10,7 +10,7 @@ namespace HNZ.TieredTechBlocks
         protected override int ForgeMod => Config.Instance.Exotic.ForgeMod;
         protected override int MaxForgeCount => Config.Instance.Exotic.MaxForgeCount;
         protected override float GpsRadius => Config.Instance.Exotic.GpsRadius;
-        protected override bool Invincible => Config.Instance.Exotic.Invincible;
+        protected override float DamageMultiply => Config.Instance.Exotic.DamageMultiply;
 
         protected override bool CanForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder)
         {

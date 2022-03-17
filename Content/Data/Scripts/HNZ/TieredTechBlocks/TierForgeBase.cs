@@ -37,7 +37,7 @@ namespace HNZ.TieredTechBlocks
         protected abstract int ForgeMod { get; }
         protected abstract int MaxForgeCount { get; }
         protected abstract float GpsRadius { get; }
-        protected abstract bool Invincible { get; }
+        protected abstract float DamageMultiply { get; }
 
         protected abstract bool CanForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder);
 
@@ -127,11 +127,11 @@ namespace HNZ.TieredTechBlocks
 
         public void BeforeDamage(ref MyDamageInformation info)
         {
-            if (Invincible && ForgeCount < MaxForgeCount)
-            {
-                //Log.Info($"damage: {info.Amount}, lifespan: {MaxForgeCount}");
-                info.Amount = 0;
-            }
+            // let block die if used up
+            if (ForgeCount >= MaxForgeCount) return;
+
+            //Log.Info($"damage: {info.Amount}, lifespan: {MaxForgeCount}");
+            info.Amount *= DamageMultiply;
         }
     }
 }
