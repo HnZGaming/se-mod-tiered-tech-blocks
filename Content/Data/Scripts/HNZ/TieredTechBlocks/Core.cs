@@ -89,7 +89,7 @@ namespace HNZ.TieredTechBlocks
             _commandModule.Update();
             _gpsModule.Update();
 
-            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
+            if (MyAPIGateway.Session.GameplayFrameCounter % 6 == 0)
             {
                 _gpsEntityModule.SendAddOrUpdate();
             }

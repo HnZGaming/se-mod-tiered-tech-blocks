@@ -28,6 +28,7 @@ namespace HNZ.TieredTechBlocks
         string IGpsEntity.Description => "Forge blocks allow you to convert Tiered Tech Source components to Tiered Tech components.";
         Vector3D IGpsEntity.Position => Entity.GetPosition();
         Color IGpsEntity.Color => Color.Orange;
+        public long EntityId => Entity.EntityId;
         double IGpsEntity.Radius => GpsRadius;
 
         MyCubeBlock Block => (MyCubeBlock)Entity;
@@ -64,6 +65,7 @@ namespace HNZ.TieredTechBlocks
         {
             if (!MyAPIGateway.Session.IsServer) return;
 
+            DumpInventory();
             Core.Instance.OnForgeClosed(this);
         }
 
@@ -105,13 +107,14 @@ namespace HNZ.TieredTechBlocks
 
             if (ForgeCount >= MaxForgeCount)
             {
-                Destroy();
+                DumpInventory();
+                ((IMyDestroyableObject)Block.SlimBlock).DoDamage(float.MaxValue, MyDamageType.Explosion, true);
             }
 
             ListPool<MyInventoryItem>.Release(items);
         }
 
-        void Destroy()
+        void DumpInventory()
         {
             var inventory = (MyInventory)Cargo.GetInventory(0);
             foreach (var item in inventory.GetItems())
@@ -120,7 +123,6 @@ namespace HNZ.TieredTechBlocks
             }
 
             inventory.Clear(true);
-            ((IMyDestroyableObject)Block.SlimBlock).DoDamage(float.MaxValue, MyDamageType.Explosion, true);
         }
 
         public void BeforeDamage(ref MyDamageInformation info)
