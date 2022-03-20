@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using HNZ.LocalGps.Interface;
 using HNZ.Utils;
 using HNZ.Utils.Communications;
-using HNZ.Utils.Communications.Gps;
 using HNZ.Utils.Logging;
 using Sandbox.ModAPI;
 using VRage.Game.Components;
@@ -23,8 +23,8 @@ namespace HNZ.TieredTechBlocks
         MoreLoot _moreLoot;
         ProtobufModule _protobufModule;
         CommandModule _commandModule;
-        GpsModule _gpsModule;
-        GpsEntityModule _gpsEntityModule;
+        LocalGpsApi _localGpsApi;
+        HashSet<TierForgeBase> _forges;
 
         Dictionary<string, Action<Command>> _serverCommands;
 
@@ -60,10 +60,8 @@ namespace HNZ.TieredTechBlocks
             _commandModule = new CommandModule(_protobufModule, 1, "ttb", this);
             _commandModule.Initialize();
 
-            _gpsModule = new GpsModule(_protobufModule, 2);
-            _gpsModule.Initialize();
-
-            _gpsEntityModule = new GpsEntityModule(_gpsModule);
+            _localGpsApi = new LocalGpsApi(nameof(TieredTechBlocks).GetHashCode());
+            _forges = new HashSet<TierForgeBase>();
         }
 
         void ReloadConfig()
@@ -79,19 +77,19 @@ namespace HNZ.TieredTechBlocks
             _moreLoot?.UnloadData();
             _protobufModule?.Close();
             _commandModule?.Close();
-            _gpsModule?.Close();
-            _gpsEntityModule?.Clear();
         }
 
         public override void UpdateBeforeSimulation()
         {
             _protobufModule.Update();
             _commandModule.Update();
-            _gpsModule.Update();
 
             if (MyAPIGateway.Session.GameplayFrameCounter % 6 == 0)
             {
-                _gpsEntityModule.SendAddOrUpdate();
+                foreach (var forge in _forges)
+                {
+                    _localGpsApi.AddOrUpdateLocalGps(forge.CreateLocalGpsSource);
+                }
             }
 
             if (MyAPIGateway.Session.IsServer)
@@ -113,13 +111,15 @@ namespace HNZ.TieredTechBlocks
 
         public void OnForgeOpened(TierForgeBase forge)
         {
-            _gpsEntityModule.Track(forge);
+            _forges.Add(forge);
+            _localGpsApi.AddOrUpdateLocalGps(forge.CreateLocalGpsSource);
             Log.Info($"forge opened: {forge.Entity.DisplayName}");
         }
 
         public void OnForgeClosed(TierForgeBase forge)
         {
-            _gpsEntityModule.UntrackAndSendRemove(forge);
+            _forges.Remove(forge);
+            _localGpsApi.RemoveLocalGps(forge.Entity.EntityId);
             Log.Info($"forge closed: {forge.Entity.DisplayName}");
         }
 

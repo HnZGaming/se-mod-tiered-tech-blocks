@@ -1,6 +1,6 @@
 ﻿using System;
+using HNZ.LocalGps.Interface;
 using HNZ.Utils;
-using HNZ.Utils.Communications.Gps;
 using HNZ.Utils.Logging;
 using HNZ.Utils.Pools;
 using Sandbox.Game;
@@ -18,18 +18,21 @@ using VRageMath;
 
 namespace HNZ.TieredTechBlocks
 {
-    public abstract class TierForgeBase : MyGameLogicComponent, IGpsEntity
+    public abstract class TierForgeBase : MyGameLogicComponent
     {
         static readonly Logger Log = LoggerManager.Create(nameof(TierForgeBase));
         static readonly Guid StorageGuid = Guid.Parse("78441755-F0CC-4005-AA58-C736864591E1");
 
-        long IGpsEntity.Id => Entity.EntityId;
-        string IGpsEntity.Name => $"{Block.DisplayNameText} ({MaxForgeCount - ForgeCount} left)";
-        string IGpsEntity.Description => "Forge blocks allow you to convert Tiered Tech Source components to Tiered Tech components.";
-        Vector3D IGpsEntity.Position => Entity.GetPosition();
-        Color IGpsEntity.Color => Color.Orange;
-        public long EntityId => Entity.EntityId;
-        double IGpsEntity.Radius => GpsRadius;
+        public LocalGpsSource CreateLocalGpsSource => new LocalGpsSource
+        {
+            Id = Entity.EntityId,
+            Name = $"{Block.DisplayNameText} ({MaxForgeCount - ForgeCount} left)",
+            Description = "Forge blocks allow you to convert Tiered Tech Source components to Tiered Tech components.",
+            Position = Entity.GetPosition(),
+            Color = Color.Orange,
+            EntityId = Entity.EntityId,
+            Radius = GpsRadius,
+        };
 
         MyCubeBlock Block => (MyCubeBlock)Entity;
         IMyCargoContainer Cargo => (IMyCargoContainer)Entity;
