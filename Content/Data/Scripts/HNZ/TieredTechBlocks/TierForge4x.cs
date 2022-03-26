@@ -11,6 +11,7 @@ namespace HNZ.TieredTechBlocks
         protected override int MaxForgeCount => Config.Instance.Rare.MaxForgeCount;
         protected override float GpsRadius => Config.Instance.Rare.GpsRadius;
         protected override float DamageMultiply => Config.Instance.Rare.DamageMultiply;
+        protected override string TierString => "Rare";
 
         protected override bool CanForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder)
         {

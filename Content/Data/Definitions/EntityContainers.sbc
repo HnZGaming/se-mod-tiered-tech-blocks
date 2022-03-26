@@ -120,6 +120,10 @@
                     <TypeId>Component</TypeId>
                     <SubtypeId>Tech2x</SubtypeId>
                 </Entry>
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>DataPad</SubtypeId>
+                </Entry>
             </InputConstraint>
         </EntityComponent>
         <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
@@ -137,6 +141,10 @@
                     <TypeId>Component</TypeId>
                     <SubtypeId>Tech4x</SubtypeId>
                 </Entry>
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>DataPad</SubtypeId>
+                </Entry>
             </InputConstraint>
         </EntityComponent>
         <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
@@ -153,6 +161,10 @@
                 <Entry>
                     <TypeId>Component</TypeId>
                     <SubtypeId>Tech8x</SubtypeId>
+                </Entry>
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>DataPad</SubtypeId>
                 </Entry>
             </InputConstraint>
         </EntityComponent>

@@ -33,6 +33,9 @@ namespace HNZ.TieredTechBlocks
         [XmlElement]
         public List<LogConfig> LogConfigs;
 
+        [XmlElement]
+        public string DataPadDescription;
+
         public void TryInitialize()
         {
             LangUtils.AssertNull(Common);
@@ -41,6 +44,7 @@ namespace HNZ.TieredTechBlocks
             LangUtils.NullOrDefault(ref ExcludeGridNames, new List<string>());
             LangUtils.NullOrDefault(ref CargoReplacements, new List<CargoReplacement>());
             LangUtils.NullOrDefault(ref LogConfigs, new List<LogConfig>());
+            LangUtils.NullOrDefault(ref DataPadDescription, "");
         }
 
         public static Config CreateDefault() => new Config
@@ -93,6 +97,7 @@ namespace HNZ.TieredTechBlocks
                     Prefix = "",
                 },
             },
+            DataPadDescription = "You can forge your {0} source components into {0} tech components using this block.",
         };
     }
 
