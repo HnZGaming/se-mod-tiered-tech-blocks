@@ -362,3 +362,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 *.sbcB5
+
+.vs/
+.idea/

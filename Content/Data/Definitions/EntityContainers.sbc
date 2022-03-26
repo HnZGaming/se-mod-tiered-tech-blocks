@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <EntityContainers>
+
+        <Container>
+            <Id>
+                <TypeId>SafeZoneBlock</TypeId>
+                <SubtypeId>SafeZoneBlock2x</SubtypeId>
+            </Id>
+            <DefaultComponents>
+                <Component BuilderType="MyObjectBuilder_Inventory" SubtypeId="SafeZoneBlock2x"/>
+            </DefaultComponents>
+        </Container>
+
+        <Container>
+            <Id>
+                <TypeId>SafeZoneBlock</TypeId>
+                <SubtypeId>SafeZoneBlock4x</SubtypeId>
+            </Id>
+            <DefaultComponents>
+                <Component BuilderType="MyObjectBuilder_Inventory" SubtypeId="SafeZoneBlock4x"/>
+            </DefaultComponents>
+        </Container>
+
+        <Container>
+            <Id>
+                <TypeId>SafeZoneBlock</TypeId>
+                <SubtypeId>SafeZoneBlock8x</SubtypeId>
+            </Id>
+            <DefaultComponents>
+                <Component BuilderType="MyObjectBuilder_Inventory" SubtypeId="SafeZoneBlock8x"/>
+            </DefaultComponents>
+        </Container>
+
+        <Container>
+            <Id>
+                <TypeId>CargoContainer</TypeId>
+                <SubtypeId>TierForge2x</SubtypeId>
+            </Id>
+            <DefaultComponents>
+                <Component BuilderType="MyObjectBuilder_Inventory" SubtypeId="TierForge2x"/>
+            </DefaultComponents>
+        </Container>
+
+        <Container>
+            <Id>
+                <TypeId>CargoContainer</TypeId>
+                <SubtypeId>TierForge4x</SubtypeId>
+            </Id>
+            <DefaultComponents>
+                <Component BuilderType="MyObjectBuilder_Inventory" SubtypeId="TierForge4x"/>
+            </DefaultComponents>
+        </Container>
+
+        <Container>
+            <Id>
+                <TypeId>CargoContainer</TypeId>
+                <SubtypeId>TierForge8x</SubtypeId>
+            </Id>
+            <DefaultComponents>
+                <Component BuilderType="MyObjectBuilder_Inventory" SubtypeId="TierForge8x"/>
+            </DefaultComponents>
+        </Container>
+        
+    </EntityContainers>
+
+    <EntityComponents>
+
+        <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+            <Id>
+                <TypeId>Inventory</TypeId>
+                <SubtypeId>SafeZoneBlock2x</SubtypeId>
+            </Id>
+            <Volume>0.005</Volume>
+            <InputConstraint IsWhitelist="true">
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>ZoneChip</SubtypeId>
+                </Entry>
+            </InputConstraint>
+        </EntityComponent>
+        <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+            <Id>
+                <TypeId>Inventory</TypeId>
+                <SubtypeId>SafeZoneBlock4x</SubtypeId>
+            </Id>
+            <Volume>0.005</Volume>
+            <InputConstraint IsWhitelist="true">
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>ZoneChip</SubtypeId>
+                </Entry>
+            </InputConstraint>
+        </EntityComponent>
+        <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+            <Id>
+                <TypeId>Inventory</TypeId>
+                <SubtypeId>SafeZoneBlock8x</SubtypeId>
+            </Id>
+            <Volume>0.005</Volume>
+            <InputConstraint IsWhitelist="true">
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>ZoneChip</SubtypeId>
+                </Entry>
+            </InputConstraint>
+        </EntityComponent>
+        <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+            <Id>
+                <TypeId>Inventory</TypeId>
+                <SubtypeId>TierForge2x</SubtypeId>
+            </Id>
+            <Volume>1</Volume>
+            <InputConstraint IsWhitelist="true">
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>Tech2xSource</SubtypeId>
+                </Entry>
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>Tech2x</SubtypeId>
+                </Entry>
+            </InputConstraint>
+        </EntityComponent>
+        <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+            <Id>
+                <TypeId>Inventory</TypeId>
+                <SubtypeId>TierForge4x</SubtypeId>
+            </Id>
+            <Volume>1</Volume>
+            <InputConstraint IsWhitelist="true">
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>Tech4xSource</SubtypeId>
+                </Entry>
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>Tech4x</SubtypeId>
+                </Entry>
+            </InputConstraint>
+        </EntityComponent>
+        <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+            <Id>
+                <TypeId>Inventory</TypeId>
+                <SubtypeId>TierForge8x</SubtypeId>
+            </Id>
+            <Volume>1</Volume>
+            <InputConstraint IsWhitelist="true">
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>Tech8xSource</SubtypeId>
+                </Entry>
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>Tech8x</SubtypeId>
+                </Entry>
+            </InputConstraint>
+        </EntityComponent>
+    </EntityComponents>
+</Definitions>

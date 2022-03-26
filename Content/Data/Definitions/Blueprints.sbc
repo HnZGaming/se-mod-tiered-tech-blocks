@@ -56,6 +56,85 @@
             <BaseProductionTimeInSeconds>40</BaseProductionTimeInSeconds>
         </Blueprint>
 
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>Tech2xSource</SubtypeId>
+            </Id>
+            <DisplayName>Common Tech Source</DisplayName>
+            <Icon>Textures\tech2xSource.dds</Icon>
+            <Prerequisites>
+                <Item Amount="120" TypeId="Ingot" SubtypeId="Iron"/>
+                <Item Amount="90" TypeId="Ingot" SubtypeId="Silicon"/>
+                <Item Amount="36" TypeId="Ingot" SubtypeId="Cobalt"/>
+                <Item Amount="25" TypeId="Ingot" SubtypeId="Silver"/>
+                <Item Amount="16" TypeId="Ingot" SubtypeId="Gold"/>
+                <Item Amount="4" TypeId="Ingot" SubtypeId="Uranium"/>
+                <Item Amount="1" TypeId="Ingot" SubtypeId="Platinum"/>
+            </Prerequisites>
+            <Result Amount="1" TypeId="Component" SubtypeId="Tech2xSource"/>
+            <BaseProductionTimeInSeconds>40</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>Tech4xSource</SubtypeId>
+            </Id>
+            <DisplayName>Rare Tech Source</DisplayName>
+            <Icon>Textures\tech4xSource.dds</Icon>
+            <Prerequisites>
+                <Item Amount="120" TypeId="Ingot" SubtypeId="Iron"/>
+                <Item Amount="90" TypeId="Ingot" SubtypeId="Silicon"/>
+                <Item Amount="36" TypeId="Ingot" SubtypeId="Cobalt"/>
+                <Item Amount="25" TypeId="Ingot" SubtypeId="Silver"/>
+                <Item Amount="16" TypeId="Ingot" SubtypeId="Gold"/>
+                <Item Amount="4" TypeId="Ingot" SubtypeId="Uranium"/>
+                <Item Amount="1" TypeId="Ingot" SubtypeId="Platinum"/>
+            </Prerequisites>
+            <Result Amount="1" TypeId="Component" SubtypeId="Tech4xSource"/>
+            <BaseProductionTimeInSeconds>40</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>Tech8xSource</SubtypeId>
+            </Id>
+            <DisplayName>Exotic Tech Source</DisplayName>
+            <Icon>Textures\tech8xSource.dds</Icon>
+            <Prerequisites>
+                <Item Amount="120" TypeId="Ingot" SubtypeId="Iron"/>
+                <Item Amount="90" TypeId="Ingot" SubtypeId="Silicon"/>
+                <Item Amount="36" TypeId="Ingot" SubtypeId="Cobalt"/>
+                <Item Amount="25" TypeId="Ingot" SubtypeId="Silver"/>
+                <Item Amount="16" TypeId="Ingot" SubtypeId="Gold"/>
+                <Item Amount="4" TypeId="Ingot" SubtypeId="Uranium"/>
+                <Item Amount="1" TypeId="Ingot" SubtypeId="Platinum"/>
+            </Prerequisites>
+            <Result Amount="1" TypeId="Component" SubtypeId="Tech8xSource"/>
+            <BaseProductionTimeInSeconds>40</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>AdminOnly</SubtypeId>
+            </Id>
+            <DisplayName>Admin Only</DisplayName>
+            <Icon>Textures\tech2xSource.dds</Icon>
+            <Prerequisites>
+                <Item Amount="120" TypeId="Ingot" SubtypeId="Iron"/>
+                <Item Amount="90" TypeId="Ingot" SubtypeId="Silicon"/>
+                <Item Amount="36" TypeId="Ingot" SubtypeId="Cobalt"/>
+                <Item Amount="25" TypeId="Ingot" SubtypeId="Silver"/>
+                <Item Amount="16" TypeId="Ingot" SubtypeId="Gold"/>
+                <Item Amount="4" TypeId="Ingot" SubtypeId="Uranium"/>
+                <Item Amount="1" TypeId="Ingot" SubtypeId="Platinum"/>
+            </Prerequisites>
+            <Result Amount="1" TypeId="Component" SubtypeId="AdminOnly"/>
+            <BaseProductionTimeInSeconds>40</BaseProductionTimeInSeconds>
+        </Blueprint>
 
         <Blueprint>
             <Id>

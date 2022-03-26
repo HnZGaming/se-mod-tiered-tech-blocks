@@ -1,26 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using Sandbox.Common.ObjectBuilders;
-using Sandbox.Game.EntityComponents;
-using Sandbox.ModAPI;
-using Sandbox.Game;
-using Sandbox.ModAPI.Interfaces;
-using Sandbox.ModAPI.Interfaces.Terminal;
-using VRage.Game;
-using VRage.Game.Entity;
-using VRage.Game.Components;
-using VRage.Game.ModAPI;
-using VRage.Game.ModAPI.Ingame;
-using VRage.ModAPI;
-using VRage.ObjectBuilders;
-using VRage.Utils;
-using VRage;
 using Sandbox.Definitions;
+using Sandbox.ModAPI;
+using VRage.Game;
+using VRage.Game.Components;
 
-namespace TieredTechBlocks
+namespace HNZ.TieredTechBlocks
 {
 	[MyEntityComponentDescriptor(typeof(MyObjectBuilder_CargoContainer), false)]
 	public class CargoUpgradeHandler : UpgradeHandler<IMyCargoContainer, MyCargoContainerDefinition>

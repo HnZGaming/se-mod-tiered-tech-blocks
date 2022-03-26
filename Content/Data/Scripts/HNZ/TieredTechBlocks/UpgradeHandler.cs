@@ -1,12 +1,8 @@
-﻿using Sandbox.Definitions;
+﻿using System.Collections.Generic;
+using Sandbox.Definitions;
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.Entity;
@@ -15,7 +11,7 @@ using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRage.Utils;
 
-namespace TieredTechBlocks
+namespace HNZ.TieredTechBlocks
 {
     public abstract class UpgradeHandler<BT, CBT> : MyGameLogicComponent where BT : IMyTerminalBlock where CBT : MyCubeBlockDefinition
 	{
