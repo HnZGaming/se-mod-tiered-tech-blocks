@@ -69,7 +69,7 @@ namespace HNZ.TieredTechBlocks
             _configFile = new ContentFile<Config>("TieredTech.cfg", Config.CreateDefault());
             _configFile.ReadOrCreateFile();
             Config.Instance = _configFile.Content;
-            LoggerManager.SetLogConfig(Config.Instance.LogConfigs);
+            LoggerManager.SetConfigs(Config.Instance.LogConfigs);
         }
 
         protected override void UnloadData()
@@ -121,6 +121,11 @@ namespace HNZ.TieredTechBlocks
             _forges.Remove(forge);
             _localGpsApi.RemoveLocalGps(forge.Entity.EntityId);
             Log.Info($"forge closed: {forge.Entity.DisplayName}");
+        }
+
+        bool ICommandListener.ProcessCommandOnClient(Command command)
+        {
+            return false;
         }
 
         void ICommandListener.ProcessCommandOnServer(Command command)

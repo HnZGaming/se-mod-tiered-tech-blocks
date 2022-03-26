@@ -556,11 +556,6 @@
     <Compile Include="Content\Data\Scripts\HNZ\Utils\AddRemoveObserver.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\BoundaryObserver.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\CharacterToPlayerLookup.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications.Gps\GpsEntityModule.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications.Gps\GpsFollow.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications.Gps\GpsModule.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications.Gps\GpsSource.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications.Gps\IGpsEntity.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications\Command.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications\CommandModule.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Communications\ICommandListener.cs" />
@@ -575,8 +570,8 @@
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\LogConfig.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\Logger.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\LoggerManager.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\LoggingLevelConfig.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\MathUtils.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\ModStorageEntry.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Pools\DictionaryPool.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Pools\ListPool.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Pools\SetPool.cs" />
