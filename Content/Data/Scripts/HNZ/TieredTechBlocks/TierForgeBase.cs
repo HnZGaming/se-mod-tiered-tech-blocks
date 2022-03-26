@@ -102,7 +102,7 @@ namespace HNZ.TieredTechBlocks
                 if (CanForge(item.Type, out builder))
                 {
                     inventory.RemoveItems(item.ItemId, 1);
-                    inventory.AddItems(1, DefinitionUtils.TechComp8xBuilder);
+                    inventory.AddItems(1, builder);
                     ForgeCount += 1;
                     break;
                 }
