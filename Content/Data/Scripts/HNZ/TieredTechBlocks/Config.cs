@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using HNZ.Utils;
 using HNZ.Utils.Logging;
 using VRage.Utils;
 
@@ -31,6 +32,16 @@ namespace HNZ.TieredTechBlocks
 
         [XmlElement]
         public List<LogConfig> LogConfigs;
+
+        public void TryInitialize()
+        {
+            LangUtils.AssertNull(Common);
+            LangUtils.AssertNull(Rare);
+            LangUtils.AssertNull(Exotic);
+            LangUtils.NullOrDefault(ref ExcludeGridNames, new List<string>());
+            LangUtils.NullOrDefault(ref CargoReplacements, new List<CargoReplacement>());
+            LangUtils.NullOrDefault(ref LogConfigs, new List<LogConfig>());
+        }
 
         public static Config CreateDefault() => new Config
         {

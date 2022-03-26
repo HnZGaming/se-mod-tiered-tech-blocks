@@ -69,6 +69,7 @@ namespace HNZ.TieredTechBlocks
             _configFile = new ContentFile<Config>("TieredTech.cfg", Config.CreateDefault());
             _configFile.ReadOrCreateFile();
             Config.Instance = _configFile.Content;
+            Config.Instance.TryInitialize();
             LoggerManager.SetConfigs(Config.Instance.LogConfigs);
         }
 
