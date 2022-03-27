@@ -1,8 +1,7 @@
 ﻿using System;
-using Sandbox.Definitions;
+using HNZ.Utils;
 using VRage.Game;
 using VRage.Game.ModAPI.Ingame;
-using VRage.ObjectBuilders;
 
 namespace HNZ.TieredTechBlocks
 {
@@ -22,32 +21,9 @@ namespace HNZ.TieredTechBlocks
             TechSource4xBuilder = new MyObjectBuilder_Component { SubtypeName = "Tech4xSource" };
             TechSource8xBuilder = new MyObjectBuilder_Component { SubtypeName = "Tech8xSource" };
 
-            foreach (var itemDefinition in MyDefinitionManager.Static.GetPhysicalItemDefinitions())
-            {
-                var typeId = itemDefinition.Id.TypeId.ToString().Split('_')[1];
-                var subtypeId = itemDefinition.Id.SubtypeName;
-                if (typeId == "Component")
-                {
-                    switch (subtypeId)
-                    {
-                        case "Tech2x":
-                        {
-                            TechComp2xBuilder = (MyObjectBuilder_PhysicalObject)MyObjectBuilderSerializer.CreateNewObject(itemDefinition.Id);
-                            break;
-                        }
-                        case "Tech4x":
-                        {
-                            TechComp4xBuilder = (MyObjectBuilder_PhysicalObject)MyObjectBuilderSerializer.CreateNewObject(itemDefinition.Id);
-                            break;
-                        }
-                        case "Tech8x":
-                        {
-                            TechComp8xBuilder = (MyObjectBuilder_PhysicalObject)MyObjectBuilderSerializer.CreateNewObject(itemDefinition.Id);
-                            break;
-                        }
-                    }
-                }
-            }
+            ObjectBuilderUtils.TryCreatePhysicalObjectBuilder("Component", "Tech2x", out TechComp2xBuilder);
+            ObjectBuilderUtils.TryCreatePhysicalObjectBuilder("Component", "Tech4x", out TechComp4xBuilder);
+            ObjectBuilderUtils.TryCreatePhysicalObjectBuilder("Component", "Tech8x", out TechComp8xBuilder);
         }
 
         public static bool IsTech2xSource(MyItemType itemType)

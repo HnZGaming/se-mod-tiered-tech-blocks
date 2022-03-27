@@ -3,6 +3,7 @@ using HNZ.LocalGps.Interface;
 using HNZ.Utils;
 using HNZ.Utils.Logging;
 using HNZ.Utils.Pools;
+using Sandbox.Common.ObjectBuilders.Definitions;
 using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
@@ -22,6 +23,7 @@ namespace HNZ.TieredTechBlocks
     {
         static readonly Logger Log = LoggerManager.Create(nameof(TierForgeBase));
         static readonly Guid StorageGuid = Guid.Parse("78441755-F0CC-4005-AA58-C736864591E1");
+        bool _runOnce;
 
         public LocalGpsSource CreateLocalGpsSource => new LocalGpsSource
         {
@@ -41,6 +43,7 @@ namespace HNZ.TieredTechBlocks
         protected abstract int MaxForgeCount { get; }
         protected abstract float GpsRadius { get; }
         protected abstract float DamageMultiply { get; }
+        protected abstract string TierString { get; }
 
         protected abstract bool CanForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder);
 
@@ -87,6 +90,11 @@ namespace HNZ.TieredTechBlocks
             if (Block.IDModule?.ShareMode != MyOwnershipShareModeEnum.All)
             {
                 Block.ChangeOwner(Block.OwnerId, MyOwnershipShareModeEnum.All);
+            }
+
+            if (LangUtils.RunOnce(ref _runOnce))
+            {
+                PutDataPad();
             }
         }
 
@@ -135,6 +143,16 @@ namespace HNZ.TieredTechBlocks
 
             //Log.Info($"damage: {info.Amount}, lifespan: {MaxForgeCount}");
             info.Amount *= DamageMultiply;
+        }
+
+        void PutDataPad()
+        {
+            var builder = MyObjectBuilderSerializer.CreateNewObject<MyObjectBuilder_Datapad>("Datapad");
+            builder.Name = $"{TierString} forge block description";
+            builder.Data = string.Format(Config.Instance.DataPadDescription, TierString);
+
+            var inventory = Cargo.GetInventory(0);
+            inventory.AddItems(1, builder);
         }
     }
 }

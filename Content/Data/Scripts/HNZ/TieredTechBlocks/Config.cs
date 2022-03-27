@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using HNZ.Utils;
 using HNZ.Utils.Logging;
 using VRage.Utils;
 
@@ -32,6 +33,20 @@ namespace HNZ.TieredTechBlocks
         [XmlElement]
         public List<LogConfig> LogConfigs;
 
+        [XmlElement]
+        public string DataPadDescription;
+
+        public void TryInitialize()
+        {
+            LangUtils.AssertNull(Common);
+            LangUtils.AssertNull(Rare);
+            LangUtils.AssertNull(Exotic);
+            LangUtils.NullOrDefault(ref ExcludeGridNames, new List<string>());
+            LangUtils.NullOrDefault(ref CargoReplacements, new List<CargoReplacement>());
+            LangUtils.NullOrDefault(ref LogConfigs, new List<LogConfig>());
+            LangUtils.NullOrDefault(ref DataPadDescription, "");
+        }
+
         public static Config CreateDefault() => new Config
         {
             Common = new TechProperty
@@ -42,6 +57,7 @@ namespace HNZ.TieredTechBlocks
                 ForgeMod = 100,
                 GpsRadius = 10,
                 MaxForgeCount = 90,
+                DamageMultiply = 0,
             },
             Rare = new TechProperty
             {
@@ -51,6 +67,7 @@ namespace HNZ.TieredTechBlocks
                 ForgeMod = 200,
                 GpsRadius = 10,
                 MaxForgeCount = 60,
+                DamageMultiply = 0,
             },
             Exotic = new TechProperty
             {
@@ -60,6 +77,7 @@ namespace HNZ.TieredTechBlocks
                 ForgeMod = 300,
                 GpsRadius = -1,
                 MaxForgeCount = 30,
+                DamageMultiply = 0,
             },
             ExcludeGridNames = new List<string>
             {
@@ -82,49 +100,7 @@ namespace HNZ.TieredTechBlocks
                     Prefix = "",
                 },
             },
+            DataPadDescription = "You can forge your {0} source components into {0} tech components using this block.",
         };
-    }
-
-    [Serializable]
-    public class TechProperty
-    {
-        [XmlAttribute]
-        public float Chance;
-
-        [XmlAttribute]
-        public int MinAmount;
-
-        [XmlAttribute]
-        public int MaxAmount;
-
-        [XmlAttribute]
-        public int ForgeMod;
-
-        // by meters
-        //  0 -> no gps
-        // -1 -> infinite gps (all players)
-        [XmlAttribute]
-        public int GpsRadius;
-
-        // by minutes
-        //  0 -> infinite
-        [XmlAttribute]
-        public int MaxForgeCount;
-
-        [XmlAttribute]
-        public float DamageMultiply;
-    }
-
-    [Serializable]
-    public class CargoReplacement
-    {
-        [XmlAttribute]
-        public string FactionTag;
-
-        [XmlAttribute]
-        public int Tier;
-
-        [XmlAttribute]
-        public float Chance;
     }
 }

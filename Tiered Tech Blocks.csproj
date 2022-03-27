@@ -543,11 +543,13 @@
     <Compile Include="Content\Data\Scripts\HNZ\LocalGps.Interface\LocalGpsApi.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\LocalGps.Interface\LocalGpsSource.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\LocalGps.Interface\LocalGpsSourceBinary.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\CargoReplacement.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\CargoUpgradeHandler.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\Core.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\DefinitionUtils.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\MoreLoot.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\Config.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TechProperty.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForge2x.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForge4x.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForge8x.cs" />
@@ -572,6 +574,7 @@
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\LoggerManager.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\MathUtils.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\ModStorageEntry.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\ObjectBuilderUtils.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Pools\DictionaryPool.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Pools\ListPool.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Pools\SetPool.cs" />
