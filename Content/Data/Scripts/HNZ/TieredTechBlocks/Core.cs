@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using HNZ.LocalGps.Interface;
+using HNZ.FlashGps.Interface;
 using HNZ.Utils;
 using HNZ.Utils.Communications;
 using HNZ.Utils.Logging;
@@ -23,7 +23,7 @@ namespace HNZ.TieredTechBlocks
         MoreLoot _moreLoot;
         ProtobufModule _protobufModule;
         CommandModule _commandModule;
-        LocalGpsApi _localGpsApi;
+        FlashGpsApi _flashGpsApi;
         HashSet<TierForgeBase> _forges;
 
         Dictionary<string, Action<Command>> _serverCommands;
@@ -32,7 +32,7 @@ namespace HNZ.TieredTechBlocks
         {
             Instance = this;
 
-            LoggerManager.SetPrefix("TieredTechBlocks");
+            LoggerManager.SetPrefix(nameof(TieredTechBlocks));
 
             if (MyAPIGateway.Session.IsServer)
             {
@@ -60,7 +60,7 @@ namespace HNZ.TieredTechBlocks
             _commandModule = new CommandModule(_protobufModule, 1, "ttb", this);
             _commandModule.Initialize();
 
-            _localGpsApi = new LocalGpsApi(nameof(TieredTechBlocks).GetHashCode());
+            _flashGpsApi = new FlashGpsApi(nameof(TieredTechBlocks).GetHashCode());
             _forges = new HashSet<TierForgeBase>();
         }
 
@@ -89,7 +89,7 @@ namespace HNZ.TieredTechBlocks
             {
                 foreach (var forge in _forges)
                 {
-                    _localGpsApi.AddOrUpdateLocalGps(forge.CreateLocalGpsSource);
+                    _flashGpsApi.AddOrUpdate(forge.FlashGpsSource);
                 }
             }
 
@@ -113,14 +113,14 @@ namespace HNZ.TieredTechBlocks
         public void OnForgeOpened(TierForgeBase forge)
         {
             _forges.Add(forge);
-            _localGpsApi.AddOrUpdateLocalGps(forge.CreateLocalGpsSource);
+            _flashGpsApi.AddOrUpdate(forge.FlashGpsSource);
             Log.Info($"forge opened: {forge.Entity.DisplayName}");
         }
 
         public void OnForgeClosed(TierForgeBase forge)
         {
             _forges.Remove(forge);
-            _localGpsApi.RemoveLocalGps(forge.Entity.EntityId);
+            _flashGpsApi.Remove(forge.Entity.EntityId);
             Log.Info($"forge closed: {forge.Entity.DisplayName}");
         }
 

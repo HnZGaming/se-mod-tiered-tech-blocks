@@ -540,9 +540,9 @@
     <Folder Include="Content" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Content\Data\Scripts\HNZ\LocalGps.Interface\LocalGpsApi.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\LocalGps.Interface\LocalGpsSource.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\LocalGps.Interface\LocalGpsSourceBinary.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\FlashGps.Interface\FlashGpsApi.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\FlashGps.Interface\FlashGpsSerialization.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\FlashGps.Interface\FlashGpsSource.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\CargoReplacement.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\CargoUpgradeHandler.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\Core.cs" />

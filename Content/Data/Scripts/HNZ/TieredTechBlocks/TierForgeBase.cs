@@ -1,5 +1,5 @@
 ﻿using System;
-using HNZ.LocalGps.Interface;
+using HNZ.FlashGps.Interface;
 using HNZ.Utils;
 using HNZ.Utils.Logging;
 using HNZ.Utils.Pools;
@@ -25,7 +25,7 @@ namespace HNZ.TieredTechBlocks
         static readonly Guid StorageGuid = Guid.Parse("78441755-F0CC-4005-AA58-C736864591E1");
         bool _runOnce;
 
-        public LocalGpsSource CreateLocalGpsSource => new LocalGpsSource
+        public FlashGpsSource FlashGpsSource => new FlashGpsSource
         {
             Id = Entity.EntityId,
             Name = $"{Block.DisplayNameText} ({MaxForgeCount - ForgeCount} left)",
@@ -34,6 +34,7 @@ namespace HNZ.TieredTechBlocks
             Color = Color.Orange,
             EntityId = Entity.EntityId,
             Radius = GpsRadius,
+            DecaySeconds = 3,
         };
 
         MyCubeBlock Block => (MyCubeBlock)Entity;
