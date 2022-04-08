@@ -77,8 +77,8 @@ namespace HNZ.TieredTechBlocks
                 }
             }
 
-            var blocks = ListPool<IMySlimBlock>.Create();
-            var cargoBlocks = ListPool<IMyCargoContainer>.Create();
+            var blocks = ListPool<IMySlimBlock>.Get();
+            var cargoBlocks = ListPool<IMyCargoContainer>.Get();
 
             grid.GetBlocks(blocks);
             foreach (var block in blocks)

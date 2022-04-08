@@ -10,6 +10,7 @@ using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using VRage.Game;
 using VRage.Game.Components;
+using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Ingame;
 using VRage.Game.ModAPI.Interfaces;
@@ -23,6 +24,8 @@ namespace HNZ.TieredTechBlocks
     {
         static readonly Logger Log = LoggerManager.Create(nameof(TierForgeBase));
         static readonly Guid StorageGuid = Guid.Parse("78441755-F0CC-4005-AA58-C736864591E1");
+
+        SafeZoneSuppressor _safeZoneSuppressor;
         bool _runOnce;
 
         public FlashGpsSource FlashGpsSource => new FlashGpsSource
@@ -43,6 +46,7 @@ namespace HNZ.TieredTechBlocks
         protected abstract int ForgeMod { get; }
         protected abstract int MaxForgeCount { get; }
         protected abstract float GpsRadius { get; }
+        protected abstract float NoSafeZoneRadius { get; }
         protected abstract float DamageMultiply { get; }
         protected abstract string TierString { get; }
 
@@ -65,6 +69,8 @@ namespace HNZ.TieredTechBlocks
                 Entity.Storage = new MyModStorageComponent();
             }
 
+            _safeZoneSuppressor = new SafeZoneSuppressor();
+
             Core.Instance.OnForgeOpened(this);
         }
 
@@ -73,6 +79,7 @@ namespace HNZ.TieredTechBlocks
             if (!MyAPIGateway.Session.IsServer) return;
 
             DumpInventory();
+            _safeZoneSuppressor.Clear();
             Core.Instance.OnForgeClosed(this);
         }
 
@@ -81,6 +88,14 @@ namespace HNZ.TieredTechBlocks
             if (!MyAPIGateway.Session.IsServer) return;
 
             if (!Block.IsWorking) return;
+
+            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
+            {
+                var sphere = new BoundingSphereD(Entity.GetPosition(), NoSafeZoneRadius);
+                _safeZoneSuppressor.CollectInSphere(ref sphere);
+            }
+
+            _safeZoneSuppressor.Suppress();
 
             if (MyAPIGateway.Session.GameplayFrameCounter % ForgeMod == 0)
             {
@@ -101,7 +116,7 @@ namespace HNZ.TieredTechBlocks
 
         void UpdateInventory()
         {
-            var items = ListPool<MyInventoryItem>.Create();
+            var items = ListPool<MyInventoryItem>.Get();
 
             var inventory = Cargo.GetInventory(0);
             inventory.GetItems(items);

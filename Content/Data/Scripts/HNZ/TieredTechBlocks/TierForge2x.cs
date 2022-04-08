@@ -10,6 +10,7 @@ namespace HNZ.TieredTechBlocks
         protected override int ForgeMod => Config.Instance.Common.ForgeMod;
         protected override int MaxForgeCount => Config.Instance.Common.MaxForgeCount;
         protected override float GpsRadius => Config.Instance.Common.GpsRadius;
+        protected override float NoSafeZoneRadius => Config.Instance.Common.NoSafeZoneRadius;
         protected override float DamageMultiply => Config.Instance.Common.DamageMultiply;
         protected override string TierString => "Common";
 

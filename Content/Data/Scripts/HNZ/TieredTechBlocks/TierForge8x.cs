@@ -10,6 +10,7 @@ namespace HNZ.TieredTechBlocks
         protected override int ForgeMod => Config.Instance.Exotic.ForgeMod;
         protected override int MaxForgeCount => Config.Instance.Exotic.MaxForgeCount;
         protected override float GpsRadius => Config.Instance.Exotic.GpsRadius;
+        protected override float NoSafeZoneRadius => Config.Instance.Exotic.NoSafeZoneRadius;
         protected override float DamageMultiply => Config.Instance.Exotic.DamageMultiply;
         protected override string TierString => "Exotic";
 
