@@ -89,13 +89,17 @@ namespace HNZ.TieredTechBlocks
 
             if (!Block.IsWorking) return;
 
-            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
+            // handle "no safe zone" zone
+            if (NoSafeZoneRadius > 0)
             {
-                var sphere = new BoundingSphereD(Entity.GetPosition(), NoSafeZoneRadius);
-                _safeZoneSuppressor.CollectInSphere(ref sphere);
-            }
+                if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
+                {
+                    var sphere = new BoundingSphereD(Entity.GetPosition(), NoSafeZoneRadius);
+                    _safeZoneSuppressor.CollectInSphere(ref sphere);
+                }
 
-            _safeZoneSuppressor.Suppress();
+                _safeZoneSuppressor.Suppress();
+            }
 
             if (MyAPIGateway.Session.GameplayFrameCounter % ForgeMod == 0)
             {
