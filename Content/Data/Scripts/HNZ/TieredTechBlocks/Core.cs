@@ -5,6 +5,7 @@ using HNZ.Utils;
 using HNZ.Utils.Communications;
 using HNZ.Utils.Logging;
 using Sandbox.ModAPI;
+using VRage.Collections;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRageMath;
@@ -24,7 +25,7 @@ namespace HNZ.TieredTechBlocks
         ProtobufModule _protobufModule;
         CommandModule _commandModule;
         FlashGpsApi _flashGpsApi;
-        HashSet<TierForgeBase> _forges;
+        ConcurrentCachingHashSet<TierForgeBase> _forges;
 
         Dictionary<string, Action<Command>> _serverCommands;
 
@@ -61,7 +62,7 @@ namespace HNZ.TieredTechBlocks
             _commandModule.Initialize();
 
             _flashGpsApi = new FlashGpsApi(nameof(TieredTechBlocks).GetHashCode());
-            _forges = new HashSet<TierForgeBase>();
+            _forges = new ConcurrentCachingHashSet<TierForgeBase>();
         }
 
         void ReloadConfig()
@@ -87,6 +88,7 @@ namespace HNZ.TieredTechBlocks
 
             if (MyAPIGateway.Session.GameplayFrameCounter % 6 == 0)
             {
+                _forges.ApplyChanges();
                 foreach (var forge in _forges)
                 {
                     _flashGpsApi.AddOrUpdate(forge.FlashGpsSource);
