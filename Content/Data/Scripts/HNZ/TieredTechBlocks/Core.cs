@@ -5,7 +5,6 @@ using HNZ.Utils;
 using HNZ.Utils.Communications;
 using HNZ.Utils.Logging;
 using Sandbox.ModAPI;
-using VRage.Collections;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRageMath;
@@ -15,9 +14,9 @@ namespace HNZ.TieredTechBlocks
     [MySessionComponentDescriptor(MyUpdateOrder.BeforeSimulation)]
     public sealed class Core : MySessionComponentBase, ICommandListener
     {
-        static readonly Logger Log = LoggerManager.Create(nameof(Core));
-
         public static Core Instance { get; private set; }
+
+        static readonly Logger Log = LoggerManager.Create(nameof(Core));
 
         bool _firstFramePassed;
         ContentFile<Config> _configFile;
@@ -25,9 +24,9 @@ namespace HNZ.TieredTechBlocks
         ProtobufModule _protobufModule;
         CommandModule _commandModule;
         FlashGpsApi _flashGpsApi;
-        ConcurrentCachingHashSet<TierForgeBase> _forges;
-
         Dictionary<string, Action<Command>> _serverCommands;
+
+        public FlashGpsApi GpsApi => _flashGpsApi;
 
         public override void LoadData()
         {
@@ -62,7 +61,6 @@ namespace HNZ.TieredTechBlocks
             _commandModule.Initialize();
 
             _flashGpsApi = new FlashGpsApi(nameof(TieredTechBlocks).GetHashCode());
-            _forges = new ConcurrentCachingHashSet<TierForgeBase>();
         }
 
         void ReloadConfig()
@@ -86,15 +84,6 @@ namespace HNZ.TieredTechBlocks
             _protobufModule.Update();
             _commandModule.Update();
 
-            if (MyAPIGateway.Session.GameplayFrameCounter % 6 == 0)
-            {
-                _forges.ApplyChanges();
-                foreach (var forge in _forges)
-                {
-                    _flashGpsApi.AddOrUpdate(forge.FlashGpsSource);
-                }
-            }
-
             if (MyAPIGateway.Session.IsServer)
             {
                 if (LangUtils.RunOnce(ref _firstFramePassed))
@@ -110,20 +99,6 @@ namespace HNZ.TieredTechBlocks
             var block = target as IMySlimBlock;
             var forge = block?.FatBlock?.GameLogic?.GetAs<TierForgeBase>();
             forge?.BeforeDamage(ref info);
-        }
-
-        public void OnForgeOpened(TierForgeBase forge)
-        {
-            _forges.Add(forge);
-            _flashGpsApi.AddOrUpdate(forge.FlashGpsSource);
-            Log.Info($"forge opened: {forge.Entity.DisplayName}");
-        }
-
-        public void OnForgeClosed(TierForgeBase forge)
-        {
-            _forges.Remove(forge);
-            _flashGpsApi.Remove(forge.Entity.EntityId);
-            Log.Info($"forge closed: {forge.Entity.DisplayName}");
         }
 
         bool ICommandListener.ProcessCommandOnClient(Command command)

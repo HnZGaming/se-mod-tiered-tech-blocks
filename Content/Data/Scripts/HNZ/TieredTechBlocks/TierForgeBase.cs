@@ -1,22 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using HNZ.FlashGps.Interface;
 using HNZ.Utils;
 using HNZ.Utils.Logging;
 using HNZ.Utils.Pools;
 using Sandbox.Common.ObjectBuilders.Definitions;
-using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using VRage.Game;
 using VRage.Game.Components;
-using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Ingame;
 using VRage.Game.ModAPI.Interfaces;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
+using IMyCubeBlock = VRage.Game.ModAPI.IMyCubeBlock;
+using IMyCubeGrid = VRage.Game.ModAPI.IMyCubeGrid;
 
 namespace HNZ.TieredTechBlocks
 {
@@ -27,8 +28,9 @@ namespace HNZ.TieredTechBlocks
 
         SafeZoneSuppressor _safeZoneSuppressor;
         bool _runOnce;
+        ISet<long> _ownerIds;
 
-        public FlashGpsSource FlashGpsSource => new FlashGpsSource
+        FlashGpsSource FlashGpsSource => new FlashGpsSource
         {
             Id = Entity.EntityId,
             Name = $"{Block.DisplayNameText} ({MaxForgeCount - ForgeCount} left)",
@@ -61,6 +63,7 @@ namespace HNZ.TieredTechBlocks
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             if (!MyAPIGateway.Session.IsServer) return;
+            Log.Info($"forge opened: {Block.CubeGrid.DisplayName}, {Entity.EntityId}");
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_100TH_FRAME;
 
@@ -70,17 +73,22 @@ namespace HNZ.TieredTechBlocks
             }
 
             _safeZoneSuppressor = new SafeZoneSuppressor();
+            _safeZoneSuppressor.TargetSafeZoneNamePrefix = "(FSZ";
 
-            Core.Instance.OnForgeOpened(this);
+            _ownerIds = new HashSet<long>();
+
+            Core.Instance.GpsApi.AddOrUpdate(FlashGpsSource);
         }
 
         public override void Close()
         {
             if (!MyAPIGateway.Session.IsServer) return;
+            Log.Info($"forge closed: {Block.CubeGrid.DisplayName}, {Entity.EntityId}");
 
-            DumpInventory();
+            GameUtils.DumpAllInventories(Entity);
             _safeZoneSuppressor.Clear();
-            Core.Instance.OnForgeClosed(this);
+
+            Core.Instance.GpsApi.Remove(FlashGpsSource.Id);
         }
 
         public override void UpdateAfterSimulation()
@@ -106,6 +114,11 @@ namespace HNZ.TieredTechBlocks
                 UpdateInventory();
             }
 
+            if (MyAPIGateway.Session.GameplayFrameCounter % 6 == 0)
+            {
+                Core.Instance.GpsApi.AddOrUpdate(FlashGpsSource);
+            }
+
             // make sure the block is "shared to all"
             if (Block.IDModule?.ShareMode != MyOwnershipShareModeEnum.All)
             {
@@ -115,6 +128,16 @@ namespace HNZ.TieredTechBlocks
             if (LangUtils.RunOnce(ref _runOnce))
             {
                 PutDataPad();
+                AddOwnerIds(Block, _ownerIds);
+            }
+
+            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
+            {
+                if (AddOwnerIds(Block, _ownerIds))
+                {
+                    DestroyBlock();
+                    Log.Info($"destroying forge; ownership changed: {Block.CubeGrid.DisplayName}");
+                }
             }
         }
 
@@ -138,22 +161,25 @@ namespace HNZ.TieredTechBlocks
 
             if (ForgeCount >= MaxForgeCount)
             {
-                DumpInventory();
-                ((IMyDestroyableObject)Block.SlimBlock).DoDamage(float.MaxValue, MyDamageType.Explosion, true);
+                DestroyBlock();
+                Log.Info($"destroying forge; used up: {Block.CubeGrid.DisplayName}");
             }
 
             ListPool<MyInventoryItem>.Release(items);
         }
 
-        void DumpInventory()
+        void DestroyBlock()
         {
-            var inventory = (MyInventory)Cargo.GetInventory(0);
-            foreach (var item in inventory.GetItems())
-            {
-                MyFloatingObjects.EnqueueInventoryItemSpawn(item, Entity.PositionComp.WorldAABB, Vector3D.Zero);
-            }
+            GameUtils.DumpAllInventories(Entity);
 
-            inventory.Clear(true);
+            if (DamageMultiply == 0)
+            {
+                Block.CubeGrid.RemoveBlock(Block.SlimBlock, true);
+            }
+            else
+            {
+                ((IMyDestroyableObject)Block.SlimBlock).DoDamage(float.MaxValue, MyDamageType.Explosion, true);
+            }
         }
 
         public void BeforeDamage(ref MyDamageInformation info)
@@ -173,6 +199,22 @@ namespace HNZ.TieredTechBlocks
 
             var inventory = Cargo.GetInventory(0);
             inventory.AddItems(1, builder);
+        }
+
+        static bool AddOwnerIds(IMyCubeBlock block, ISet<long> ownerIds)
+        {
+            var addedNewIds = false;
+            var grids = ListPool<IMyCubeGrid>.Get();
+            var group = block.CubeGrid.GetGridGroup(GridLinkTypeEnum.Physical);
+            group.GetGrids(grids);
+            foreach (var grid in grids)
+            foreach (var ownerId in grid.BigOwners)
+            {
+                addedNewIds |= ownerIds.Add(ownerId);
+            }
+
+            ListPool<IMyCubeGrid>.Release(grids);
+            return addedNewIds;
         }
     }
 }
