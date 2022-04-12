@@ -8,27 +8,28 @@ using Sandbox.Common.ObjectBuilders.Definitions;
 using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
+using SpaceEngineers.Game.ModAPI;
 using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Ingame;
 using VRage.Game.ModAPI.Interfaces;
+using VRage.Game.ObjectBuilders.Components;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
-using IMyCubeBlock = VRage.Game.ModAPI.IMyCubeBlock;
-using IMyCubeGrid = VRage.Game.ModAPI.IMyCubeGrid;
 
 namespace HNZ.TieredTechBlocks
 {
-    public abstract class TierForgeBase : MyGameLogicComponent
+    public abstract class TierForgeBase : MyGameLogicComponent, SafeZoneSuppressor.IFilter
     {
         static readonly Logger Log = LoggerManager.Create(nameof(TierForgeBase));
         static readonly Guid StorageGuid = Guid.Parse("78441755-F0CC-4005-AA58-C736864591E1");
 
         SafeZoneSuppressor _safeZoneSuppressor;
         bool _runOnce;
-        ISet<long> _ownerIds;
+        bool _compromised;
+        ISet<long> _owningFactionIds;
 
         FlashGpsSource FlashGpsSource => new FlashGpsSource
         {
@@ -60,6 +61,8 @@ namespace HNZ.TieredTechBlocks
             set { Entity.Storage.SetValue(StorageGuid, value.ToString("0")); }
         }
 
+        bool CanDestroy => _compromised || (ForgeCount >= MaxForgeCount);
+
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             if (!MyAPIGateway.Session.IsServer) return;
@@ -72,10 +75,8 @@ namespace HNZ.TieredTechBlocks
                 Entity.Storage = new MyModStorageComponent();
             }
 
-            _safeZoneSuppressor = new SafeZoneSuppressor();
-            _safeZoneSuppressor.TargetSafeZoneNamePrefix = "(FSZ";
-
-            _ownerIds = new HashSet<long>();
+            _safeZoneSuppressor = new SafeZoneSuppressor(this);
+            _owningFactionIds = new HashSet<long>();
 
             Core.Instance.GpsApi.AddOrUpdate(FlashGpsSource);
         }
@@ -100,7 +101,7 @@ namespace HNZ.TieredTechBlocks
             // handle "no safe zone" zone
             if (NoSafeZoneRadius > 0)
             {
-                if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
+                if (GameUtils.EverySeconds(1))
                 {
                     var sphere = new BoundingSphereD(Entity.GetPosition(), NoSafeZoneRadius);
                     _safeZoneSuppressor.CollectInSphere(ref sphere);
@@ -114,7 +115,7 @@ namespace HNZ.TieredTechBlocks
                 UpdateInventory();
             }
 
-            if (MyAPIGateway.Session.GameplayFrameCounter % 6 == 0)
+            if (GameUtils.EverySeconds(0.1f))
             {
                 Core.Instance.GpsApi.AddOrUpdate(FlashGpsSource);
             }
@@ -128,15 +129,17 @@ namespace HNZ.TieredTechBlocks
             if (LangUtils.RunOnce(ref _runOnce))
             {
                 PutDataPad();
-                AddOwnerIds(Block, _ownerIds);
+                Block.CubeGrid.GetGroupFactionIds(_owningFactionIds, GridLinkTypeEnum.Physical);
             }
 
-            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
+            if (GameUtils.EverySeconds(1))
             {
-                if (AddOwnerIds(Block, _ownerIds))
+                _compromised |= Block.CubeGrid.GetGroupFactionIds(_owningFactionIds, GridLinkTypeEnum.Physical);
+
+                // must delete forges inside a safe zone
+                if (!GameUtils.IsDamageAllowed(Block.CubeGrid))
                 {
-                    DestroyBlock();
-                    Log.Info($"destroying forge; ownership changed: {Block.CubeGrid.DisplayName}");
+                    DestroyBlock(true);
                 }
             }
         }
@@ -168,11 +171,11 @@ namespace HNZ.TieredTechBlocks
             ListPool<MyInventoryItem>.Release(items);
         }
 
-        void DestroyBlock()
+        void DestroyBlock(bool force = false)
         {
             GameUtils.DumpAllInventories(Entity);
 
-            if (DamageMultiply == 0)
+            if (!CanDestroy || force)
             {
                 Block.CubeGrid.RemoveBlock(Block.SlimBlock, true);
             }
@@ -184,11 +187,10 @@ namespace HNZ.TieredTechBlocks
 
         public void BeforeDamage(ref MyDamageInformation info)
         {
-            // let block die if used up
-            if (ForgeCount >= MaxForgeCount) return;
-
-            //Log.Info($"damage: {info.Amount}, lifespan: {MaxForgeCount}");
-            info.Amount *= DamageMultiply;
+            if (!CanDestroy)
+            {
+                info.Amount *= DamageMultiply;
+            }
         }
 
         void PutDataPad()
@@ -201,20 +203,17 @@ namespace HNZ.TieredTechBlocks
             inventory.AddItems(1, builder);
         }
 
-        static bool AddOwnerIds(IMyCubeBlock block, ISet<long> ownerIds)
+        bool SafeZoneSuppressor.IFilter.CanSuppress(MySafeZone safeZone)
         {
-            var addedNewIds = false;
-            var grids = ListPool<IMyCubeGrid>.Get();
-            var group = block.CubeGrid.GetGridGroup(GridLinkTypeEnum.Physical);
-            group.GetGrids(grids);
-            foreach (var grid in grids)
-            foreach (var ownerId in grid.BigOwners)
-            {
-                addedNewIds |= ownerIds.Add(ownerId);
-            }
+            // don't suppress any block-less safe zones
+            // which are either FSZ or economy stuff
+            return false;
+        }
 
-            ListPool<IMyCubeGrid>.Release(grids);
-            return addedNewIds;
+        bool SafeZoneSuppressor.IFilter.CanSuppress(IMySafeZoneBlock safeZoneBlock)
+        {
+            // Stop suppressing player-made safe zones when compromised
+            return !_compromised;
         }
     }
 }
