@@ -58,7 +58,6 @@ namespace HNZ.TieredTechBlocks
                 GpsRadius = 10,
                 NoSafeZoneRadius = 10000,
                 MaxForgeCount = 90,
-                DamageMultiply = 0,
             },
             Rare = new TechProperty
             {
@@ -69,7 +68,6 @@ namespace HNZ.TieredTechBlocks
                 GpsRadius = 10,
                 NoSafeZoneRadius = 10000,
                 MaxForgeCount = 60,
-                DamageMultiply = 0,
             },
             Exotic = new TechProperty
             {
@@ -80,7 +78,6 @@ namespace HNZ.TieredTechBlocks
                 GpsRadius = -1,
                 NoSafeZoneRadius = 10000,
                 MaxForgeCount = 30,
-                DamageMultiply = 0,
             },
             ExcludeGridNames = new List<string>
             {
