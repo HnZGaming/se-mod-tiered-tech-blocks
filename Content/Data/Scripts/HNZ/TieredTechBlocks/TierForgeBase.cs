@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using HNZ.FlashGps.Interface;
 using HNZ.Utils;
 using HNZ.Utils.Logging;
 using HNZ.Utils.Pools;
 using Sandbox.Common.ObjectBuilders.Definitions;
-using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
+using SpaceEngineers.Game.ModAPI;
 using VRage.Game;
 using VRage.Game.Components;
-using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Ingame;
 using VRage.Game.ModAPI.Interfaces;
@@ -20,25 +20,18 @@ using VRageMath;
 
 namespace HNZ.TieredTechBlocks
 {
-    public abstract class TierForgeBase : MyGameLogicComponent
+    public abstract class TierForgeBase : MyGameLogicComponent, SafeZoneSuppressor.IFilter
     {
         static readonly Logger Log = LoggerManager.Create(nameof(TierForgeBase));
         static readonly Guid StorageGuid = Guid.Parse("78441755-F0CC-4005-AA58-C736864591E1");
 
+        const float AutoDeleteSecs = 30;
+
         SafeZoneSuppressor _safeZoneSuppressor;
         bool _runOnce;
-
-        public FlashGpsSource FlashGpsSource => new FlashGpsSource
-        {
-            Id = Entity.EntityId,
-            Name = $"{Block.DisplayNameText} ({MaxForgeCount - ForgeCount} left)",
-            Description = "Forge blocks allow you to convert Tiered Tech Source components to Tiered Tech components.",
-            Position = Entity.GetPosition(),
-            Color = Color.Orange,
-            EntityId = Entity.EntityId,
-            Radius = GpsRadius,
-            DecaySeconds = 3,
-        };
+        bool _compromised;
+        ISet<long> _owningFactionIds;
+        DateTime? _usedUpTime;
 
         MyCubeBlock Block => (MyCubeBlock)Entity;
         IMyCargoContainer Cargo => (IMyCargoContainer)Entity;
@@ -47,7 +40,6 @@ namespace HNZ.TieredTechBlocks
         protected abstract int MaxForgeCount { get; }
         protected abstract float GpsRadius { get; }
         protected abstract float NoSafeZoneRadius { get; }
-        protected abstract float DamageMultiply { get; }
         protected abstract string TierString { get; }
 
         protected abstract bool CanForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder);
@@ -58,9 +50,47 @@ namespace HNZ.TieredTechBlocks
             set { Entity.Storage.SetValue(StorageGuid, value.ToString("0")); }
         }
 
+        bool UsedUp => ForgeCount >= MaxForgeCount;
+        bool CanDestroy => _compromised || UsedUp;
+        TimeSpan? RemainingTime => _usedUpTime + TimeSpan.FromSeconds(AutoDeleteSecs) - DateTime.UtcNow;
+
+        FlashGpsSource GetFlashGpsSource()
+        {
+            var remainingTime = RemainingTime;
+            if (remainingTime.HasValue)
+            {
+                var remainingTimeStr = LangUtils.HoursToString(remainingTime.Value.TotalHours);
+                return new FlashGpsSource
+                {
+                    Id = Entity.EntityId,
+                    Name = $"Used up; exploding in {remainingTimeStr}",
+                    Position = Entity.GetPosition(),
+                    Color = Color.Orange,
+                    EntityId = Entity.EntityId,
+                    Radius = 100,
+                    DecaySeconds = 3,
+                };
+            }
+            else
+            {
+                return new FlashGpsSource
+                {
+                    Id = Entity.EntityId,
+                    Name = $"{Block.DisplayNameText} ({MaxForgeCount - ForgeCount} left)",
+                    Description = "Forge blocks allow you to convert Tiered Tech Source components to Tiered Tech components.",
+                    Position = Entity.GetPosition(),
+                    Color = Color.Orange,
+                    EntityId = Entity.EntityId,
+                    Radius = GpsRadius,
+                    DecaySeconds = 3,
+                };
+            }
+        }
+
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             if (!MyAPIGateway.Session.IsServer) return;
+            Log.Info($"forge opened: {Block.CubeGrid.DisplayName}, {Entity.EntityId}");
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_100TH_FRAME;
 
@@ -69,37 +99,56 @@ namespace HNZ.TieredTechBlocks
                 Entity.Storage = new MyModStorageComponent();
             }
 
-            _safeZoneSuppressor = new SafeZoneSuppressor();
+            _safeZoneSuppressor = new SafeZoneSuppressor(this);
+            _owningFactionIds = new HashSet<long>();
 
-            Core.Instance.OnForgeOpened(this);
+            Core.Instance.GpsApi.AddOrUpdate(GetFlashGpsSource());
         }
 
         public override void Close()
         {
             if (!MyAPIGateway.Session.IsServer) return;
+            Log.Info($"forge closed: {Block.CubeGrid.DisplayName}, {Entity.EntityId}");
 
-            DumpInventory();
+            GameUtils.DumpAllInventories(Entity);
             _safeZoneSuppressor.Clear();
-            Core.Instance.OnForgeClosed(this);
+
+            Core.Instance.GpsApi.Remove(GetFlashGpsSource().Id);
         }
 
         public override void UpdateAfterSimulation()
         {
             if (!MyAPIGateway.Session.IsServer) return;
 
-            if (!Block.IsWorking) return;
-
-            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
+            var remainingTime = RemainingTime;
+            if (remainingTime.HasValue && remainingTime.Value <= TimeSpan.Zero)
             {
-                var sphere = new BoundingSphereD(Entity.GetPosition(), NoSafeZoneRadius);
-                _safeZoneSuppressor.CollectInSphere(ref sphere);
+                DestroyBlock();
+                return;
             }
 
-            _safeZoneSuppressor.Suppress();
+            if (!Block.IsWorking) return;
+
+            // handle "no safe zone" zone
+            if (NoSafeZoneRadius > 0)
+            {
+                if (GameUtils.EverySeconds(1))
+                {
+                    var sphere = new BoundingSphereD(Entity.GetPosition(), NoSafeZoneRadius);
+                    _safeZoneSuppressor.CollectInSphere(ref sphere);
+                }
+
+                _safeZoneSuppressor.Suppress();
+            }
 
             if (MyAPIGateway.Session.GameplayFrameCounter % ForgeMod == 0)
             {
                 UpdateInventory();
+            }
+
+            if (GameUtils.EverySeconds(0.1f))
+            {
+                Core.Instance.GpsApi.AddOrUpdate(GetFlashGpsSource());
             }
 
             // make sure the block is "shared to all"
@@ -111,13 +160,26 @@ namespace HNZ.TieredTechBlocks
             if (LangUtils.RunOnce(ref _runOnce))
             {
                 PutDataPad();
+                Block.CubeGrid.GetGroupFactionIds(_owningFactionIds, GridLinkTypeEnum.Physical);
+            }
+
+            if (GameUtils.EverySeconds(1))
+            {
+                _compromised |= Block.CubeGrid.GetGroupFactionIds(_owningFactionIds, GridLinkTypeEnum.Physical);
+
+                // must delete forges inside a safe zone
+                if (!GameUtils.IsDamageAllowed(Block.CubeGrid))
+                {
+                    DestroyBlock(true);
+                }
             }
         }
 
         void UpdateInventory()
         {
-            var items = ListPool<MyInventoryItem>.Get();
+            if (UsedUp) return;
 
+            var items = ListPool<MyInventoryItem>.Get();
             var inventory = Cargo.GetInventory(0);
             inventory.GetItems(items);
             foreach (var item in items)
@@ -132,33 +194,34 @@ namespace HNZ.TieredTechBlocks
                 }
             }
 
-            if (ForgeCount >= MaxForgeCount)
-            {
-                DumpInventory();
-                ((IMyDestroyableObject)Block.SlimBlock).DoDamage(float.MaxValue, MyDamageType.Explosion, true);
-            }
-
             ListPool<MyInventoryItem>.Release(items);
+
+            if (UsedUp && _usedUpTime == null)
+            {
+                _usedUpTime = DateTime.UtcNow;
+            }
         }
 
-        void DumpInventory()
+        void DestroyBlock(bool force = false)
         {
-            var inventory = (MyInventory)Cargo.GetInventory(0);
-            foreach (var item in inventory.GetItems())
-            {
-                MyFloatingObjects.EnqueueInventoryItemSpawn(item, Entity.PositionComp.WorldAABB, Vector3D.Zero);
-            }
+            GameUtils.DumpAllInventories(Entity);
 
-            inventory.Clear(true);
+            if (!CanDestroy || force)
+            {
+                Block.CubeGrid.RemoveBlock(Block.SlimBlock, true);
+            }
+            else
+            {
+                ((IMyDestroyableObject)Block.SlimBlock).DoDamage(float.MaxValue, MyDamageType.Explosion, true);
+            }
         }
 
         public void BeforeDamage(ref MyDamageInformation info)
         {
-            // let block die if used up
-            if (ForgeCount >= MaxForgeCount) return;
-
-            //Log.Info($"damage: {info.Amount}, lifespan: {MaxForgeCount}");
-            info.Amount *= DamageMultiply;
+            if (!CanDestroy)
+            {
+                info.Amount = 0;
+            }
         }
 
         void PutDataPad()
@@ -169,6 +232,19 @@ namespace HNZ.TieredTechBlocks
 
             var inventory = Cargo.GetInventory(0);
             inventory.AddItems(1, builder);
+        }
+
+        bool SafeZoneSuppressor.IFilter.CanSuppress(MySafeZone safeZone)
+        {
+            // don't suppress any block-less safe zones
+            // which are either FSZ or economy stuff
+            return false;
+        }
+
+        bool SafeZoneSuppressor.IFilter.CanSuppress(IMySafeZoneBlock safeZoneBlock)
+        {
+            // Stop suppressing player-made safe zones when compromised
+            return !_compromised;
         }
     }
 }

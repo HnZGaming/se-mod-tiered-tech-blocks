@@ -11,7 +11,6 @@ namespace HNZ.TieredTechBlocks
         protected override int MaxForgeCount => Config.Instance.Common.MaxForgeCount;
         protected override float GpsRadius => Config.Instance.Common.GpsRadius;
         protected override float NoSafeZoneRadius => Config.Instance.Common.NoSafeZoneRadius;
-        protected override float DamageMultiply => Config.Instance.Common.DamageMultiply;
         protected override string TierString => "Common";
 
         protected override bool CanForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder)
