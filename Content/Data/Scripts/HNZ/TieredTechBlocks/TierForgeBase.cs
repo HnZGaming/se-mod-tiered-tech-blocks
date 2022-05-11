@@ -184,6 +184,7 @@ namespace HNZ.TieredTechBlocks
         public void BeforeDamage(ref MyDamageInformation info)
         {
             info.Amount = 0;
+            info.IsDeformation = false;
         }
 
         void PutDataPad()
