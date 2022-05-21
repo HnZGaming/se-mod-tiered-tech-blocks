@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HNZ.Utils.Logging;
 using HNZ.Utils.Pools;
 using Sandbox.Game;
 using Sandbox.ModAPI;
@@ -12,6 +13,8 @@ namespace HNZ.TieredTechBlocks
 {
     public sealed class MoreLoot
     {
+        static readonly Logger Log = LoggerManager.Create(nameof(MoreLoot));
+
         struct Loot
         {
             public MyObjectBuilder_Component Builder;
@@ -77,6 +80,8 @@ namespace HNZ.TieredTechBlocks
                 }
             }
 
+            Log.Info($"grid spawned; prefab: '{prefabName}', entity: '{gridName}', id: {entityId}");
+
             var blocks = ListPool<IMySlimBlock>.Get();
             var cargoBlocks = ListPool<IMyCargoContainer>.Get();
 
@@ -102,14 +107,17 @@ namespace HNZ.TieredTechBlocks
                 var blockPos = smallCargoBlock.Position;
                 var ownerId = smallCargoBlock.OwnerId;
                 grid.RemoveBlock(smallCargoBlock.SlimBlock);
+                var forgeName = DefinitionUtils.ForgeBlockSubtypeName(cargoReplacement.Tier);
                 grid.AddBlock(new MyObjectBuilder_CargoContainer
                 {
-                    SubtypeName = DefinitionUtils.ForgeBlockSubtypeName(cargoReplacement.Tier),
+                    SubtypeName = forgeName,
                     Orientation = new SerializableQuaternion(),
                     Min = new SerializableVector3I(blockPos.X, blockPos.Y, blockPos.Z),
                     BuiltBy = ownerId,
                     Owner = ownerId,
                 }, true);
+                
+                Log.Info($"cargo replaced to forge: {forgeName}");
             }
 
             cargoBlocks.ShuffleList();
