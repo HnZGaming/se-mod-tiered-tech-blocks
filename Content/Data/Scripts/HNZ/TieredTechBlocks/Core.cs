@@ -91,6 +91,8 @@ namespace HNZ.TieredTechBlocks
                     MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0,
                         (object o, ref MyDamageInformation info) => BeforeDamage(o, ref info));
                 }
+                
+                _moreLoot.Update();
             }
         }
 

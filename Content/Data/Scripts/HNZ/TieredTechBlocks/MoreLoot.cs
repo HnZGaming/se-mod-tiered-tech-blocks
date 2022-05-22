@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using HNZ.Utils.Logging;
 using HNZ.Utils.Pools;
@@ -23,7 +24,14 @@ namespace HNZ.TieredTechBlocks
             public double Chance;
         }
 
+        struct SpawnInfo
+        {
+            public long EntityId;
+            public string PrefabName;
+        }
+
         Loot[] _loots;
+        ConcurrentQueue<SpawnInfo> _spawns;
 
         public void LoadData()
         {
@@ -52,6 +60,8 @@ namespace HNZ.TieredTechBlocks
                 },
             };
 
+            _spawns = new ConcurrentQueue<SpawnInfo>();
+
             if (MyAPIGateway.Session.IsServer)
             {
                 MyVisualScriptLogicProvider.PrefabSpawnedDetailed += OnGridSpawned;
@@ -67,6 +77,24 @@ namespace HNZ.TieredTechBlocks
         }
 
         void OnGridSpawned(long entityId, string prefabName)
+        {
+            _spawns.Enqueue(new SpawnInfo
+            {
+                EntityId = entityId,
+                PrefabName = prefabName,
+            });
+        }
+
+        public void Update()
+        {
+            SpawnInfo spawn;
+            while (_spawns.TryDequeue(out spawn))
+            {
+                InsertLoot(spawn.EntityId, spawn.PrefabName);
+            }
+        }
+
+        void InsertLoot(long entityId, string prefabName)
         {
             var grid = MyAPIGateway.Entities.GetEntityById(entityId) as IMyCubeGrid;
             if (grid?.Physics == null) return;
@@ -116,7 +144,7 @@ namespace HNZ.TieredTechBlocks
                     BuiltBy = ownerId,
                     Owner = ownerId,
                 }, true);
-                
+
                 Log.Info($"cargo replaced to forge: {forgeName}");
             }
 
