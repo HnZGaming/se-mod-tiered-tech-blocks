@@ -4,6 +4,7 @@ using HNZ.Utils;
 using HNZ.Utils.Logging;
 using HNZ.Utils.Pools;
 using Sandbox.Common.ObjectBuilders.Definitions;
+using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
@@ -143,6 +144,7 @@ namespace HNZ.TieredTechBlocks
                 // delete forges inside a safe zone
                 if (!GameUtils.IsDamageAllowed(Block.CubeGrid))
                 {
+                    SendSafeZoneMessage();
                     DestroyBlock();
                 }
             }
@@ -195,6 +197,25 @@ namespace HNZ.TieredTechBlocks
 
             var inventory = Cargo.GetInventory(0);
             inventory.AddItems(1, builder);
+        }
+
+        void SendSafeZoneMessage()
+        {
+            var characters = ListPool<IMyCharacter>.Get();
+            Entity.GetCharacters(500, characters);
+            foreach (var character in characters)
+            {
+                if (!character.IsPlayer) continue;
+
+                var playerId = character.ControllerInfo?.ControllingIdentityId ?? 0;
+                if (playerId == 0) continue;
+
+                MyVisualScriptLogicProvider.SendChatMessageColored(
+                    "Forge block vaporized in a player safe zone.",
+                    Color.Red,
+                    "Tiered Tech Blocks",
+                    playerId);
+            }
         }
     }
 }
