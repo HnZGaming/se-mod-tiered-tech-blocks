@@ -23,9 +23,6 @@ namespace HNZ.TieredTechBlocks
         // -1 -> infinite gps (all players)
         [XmlAttribute]
         public int GpsRadius;
-        
-        [XmlAttribute]
-        public int NoSafeZoneRadius;
 
         // by minutes
         //  0 -> infinite

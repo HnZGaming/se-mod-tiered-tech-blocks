@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using HNZ.Utils.Logging;
 using HNZ.Utils.Pools;
 using Sandbox.Game;
 using Sandbox.ModAPI;
@@ -12,6 +14,8 @@ namespace HNZ.TieredTechBlocks
 {
     public sealed class MoreLoot
     {
+        static readonly Logger Log = LoggerManager.Create(nameof(MoreLoot));
+
         struct Loot
         {
             public MyObjectBuilder_Component Builder;
@@ -20,7 +24,14 @@ namespace HNZ.TieredTechBlocks
             public double Chance;
         }
 
+        struct SpawnInfo
+        {
+            public long EntityId;
+            public string PrefabName;
+        }
+
         Loot[] _loots;
+        ConcurrentQueue<SpawnInfo> _spawns;
 
         public void LoadData()
         {
@@ -49,6 +60,8 @@ namespace HNZ.TieredTechBlocks
                 },
             };
 
+            _spawns = new ConcurrentQueue<SpawnInfo>();
+
             if (MyAPIGateway.Session.IsServer)
             {
                 MyVisualScriptLogicProvider.PrefabSpawnedDetailed += OnGridSpawned;
@@ -65,6 +78,24 @@ namespace HNZ.TieredTechBlocks
 
         void OnGridSpawned(long entityId, string prefabName)
         {
+            _spawns.Enqueue(new SpawnInfo
+            {
+                EntityId = entityId,
+                PrefabName = prefabName,
+            });
+        }
+
+        public void Update()
+        {
+            SpawnInfo spawn;
+            while (_spawns.TryDequeue(out spawn))
+            {
+                InsertLoot(spawn.EntityId, spawn.PrefabName);
+            }
+        }
+
+        void InsertLoot(long entityId, string prefabName)
+        {
             var grid = MyAPIGateway.Entities.GetEntityById(entityId) as IMyCubeGrid;
             if (grid?.Physics == null) return;
 
@@ -76,6 +107,8 @@ namespace HNZ.TieredTechBlocks
                     return;
                 }
             }
+
+            Log.Info($"grid spawned; prefab: '{prefabName}', entity: '{gridName}', id: {entityId}");
 
             var blocks = ListPool<IMySlimBlock>.Get();
             var cargoBlocks = ListPool<IMyCargoContainer>.Get();
@@ -102,25 +135,25 @@ namespace HNZ.TieredTechBlocks
                 var blockPos = smallCargoBlock.Position;
                 var ownerId = smallCargoBlock.OwnerId;
                 grid.RemoveBlock(smallCargoBlock.SlimBlock);
+                var forgeName = DefinitionUtils.ForgeBlockSubtypeName(cargoReplacement.Tier);
                 grid.AddBlock(new MyObjectBuilder_CargoContainer
                 {
-                    SubtypeName = DefinitionUtils.ForgeBlockSubtypeName(cargoReplacement.Tier),
+                    SubtypeName = forgeName,
                     Orientation = new SerializableQuaternion(),
                     Min = new SerializableVector3I(blockPos.X, blockPos.Y, blockPos.Z),
                     BuiltBy = ownerId,
                     Owner = ownerId,
                 }, true);
+
+                Log.Info($"cargo replaced to forge: {forgeName}");
             }
 
-            cargoBlocks.ShuffleList();
-
-            var addedCount = 0;
-            foreach (var cargoBlock in cargoBlocks)
             foreach (var loot in _loots)
+            foreach (var cargoBlock in cargoBlocks)
             {
-                if (TryAddLoot(cargoBlock.GetInventory(), loot))
+                if (loot.Chance >= MyUtils.GetRandomDouble(0, 1))
                 {
-                    if (addedCount++ >= 5) break;
+                    AddLoot(cargoBlock.GetInventory(), loot);
                 }
             }
 
@@ -172,9 +205,8 @@ namespace HNZ.TieredTechBlocks
         {
             foreach (var cargoBlock in cargoBlocks)
             {
-                if (cargoBlock.SlimBlock.BlockDefinition.Id.SubtypeName == "LargeBlockSmallContainer")
+                if (TryGetSmallCargo(cargoBlock, out smallCargo))
                 {
-                    smallCargo = cargoBlock;
                     return true;
                 }
             }
@@ -183,16 +215,22 @@ namespace HNZ.TieredTechBlocks
             return false;
         }
 
-        static bool TryAddLoot(IMyInventory inventory, Loot loot)
+        public static bool TryGetSmallCargo(IMyCargoContainer cargoBlock, out IMyCargoContainer smallCargo)
         {
-            if (loot.Chance >= MyUtils.GetRandomDouble(0, 1))
+            if (cargoBlock.SlimBlock.BlockDefinition.Id.SubtypeName == "LargeBlockSmallContainer")
             {
-                var amount = MyUtils.GetRandomInt(loot.MinAmount, loot.MaxAmount);
-                inventory.AddItems(amount, loot.Builder);
+                smallCargo = cargoBlock;
                 return true;
             }
 
+            smallCargo = default(IMyCargoContainer);
             return false;
+        }
+
+        static void AddLoot(IMyInventory inventory, Loot loot)
+        {
+            var amount = MyUtils.GetRandomInt(loot.MinAmount, loot.MaxAmount);
+            inventory.AddItems(amount, loot.Builder);
         }
     }
 }
