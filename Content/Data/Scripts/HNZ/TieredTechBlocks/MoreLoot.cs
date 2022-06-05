@@ -148,15 +148,12 @@ namespace HNZ.TieredTechBlocks
                 Log.Info($"cargo replaced to forge: {forgeName}");
             }
 
-            cargoBlocks.ShuffleList();
-
-            var addedCount = 0;
-            foreach (var cargoBlock in cargoBlocks)
             foreach (var loot in _loots)
+            foreach (var cargoBlock in cargoBlocks)
             {
-                if (TryAddLoot(cargoBlock.GetInventory(), loot))
+                if (loot.Chance >= MyUtils.GetRandomDouble(0, 1))
                 {
-                    if (addedCount++ >= 5) break;
+                    AddLoot(cargoBlock.GetInventory(), loot);
                 }
             }
 
@@ -208,9 +205,8 @@ namespace HNZ.TieredTechBlocks
         {
             foreach (var cargoBlock in cargoBlocks)
             {
-                if (cargoBlock.SlimBlock.BlockDefinition.Id.SubtypeName == "LargeBlockSmallContainer")
+                if (TryGetSmallCargo(cargoBlock, out smallCargo))
                 {
-                    smallCargo = cargoBlock;
                     return true;
                 }
             }
@@ -219,16 +215,22 @@ namespace HNZ.TieredTechBlocks
             return false;
         }
 
-        static bool TryAddLoot(IMyInventory inventory, Loot loot)
+        public static bool TryGetSmallCargo(IMyCargoContainer cargoBlock, out IMyCargoContainer smallCargo)
         {
-            if (loot.Chance >= MyUtils.GetRandomDouble(0, 1))
+            if (cargoBlock.SlimBlock.BlockDefinition.Id.SubtypeName == "LargeBlockSmallContainer")
             {
-                var amount = MyUtils.GetRandomInt(loot.MinAmount, loot.MaxAmount);
-                inventory.AddItems(amount, loot.Builder);
+                smallCargo = cargoBlock;
                 return true;
             }
 
+            smallCargo = default(IMyCargoContainer);
             return false;
+        }
+
+        static void AddLoot(IMyInventory inventory, Loot loot)
+        {
+            var amount = MyUtils.GetRandomInt(loot.MinAmount, loot.MaxAmount);
+            inventory.AddItems(amount, loot.Builder);
         }
     }
 }

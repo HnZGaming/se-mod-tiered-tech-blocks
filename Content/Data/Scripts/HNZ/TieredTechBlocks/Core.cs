@@ -91,7 +91,7 @@ namespace HNZ.TieredTechBlocks
                     MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0,
                         (object o, ref MyDamageInformation info) => BeforeDamage(o, ref info));
                 }
-                
+
                 _moreLoot.Update();
             }
         }
@@ -99,8 +99,29 @@ namespace HNZ.TieredTechBlocks
         static void BeforeDamage(object target, ref MyDamageInformation info)
         {
             var block = target as IMySlimBlock;
-            var forge = block?.FatBlock?.GameLogic?.GetAs<TierForgeBase>();
+            if (block == null) return;
+
+            // forge
+            var forge = block.FatBlock?.GameLogic?.GetAs<TierForgeBase>();
             forge?.BeforeDamage(ref info);
+
+            // loot
+            BeforeDamageLoot(block, ref info);
+        }
+
+        static void BeforeDamageLoot(IMySlimBlock target, ref MyDamageInformation info)
+        {
+            var cargo = target.FatBlock as IMyCargoContainer;
+            if (cargo == null) return;
+
+            IMyCargoContainer smallCargo;
+            if (!MoreLoot.TryGetSmallCargo(cargo, out smallCargo)) return;
+
+            var ownerFactionTag = smallCargo.GetOwnerFactionTag();
+            if (ownerFactionTag == null) return; // unowned block is exempt
+            if (ownerFactionTag.Length == 3) return; // player block is exempt
+
+            info.Amount /= 5;
         }
 
         bool ICommandListener.ProcessCommandOnClient(Command command)
