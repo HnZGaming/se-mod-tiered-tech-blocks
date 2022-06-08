@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using HNZ.FlashGps.Interface;
 using HNZ.Utils;
 using HNZ.Utils.Logging;
@@ -46,6 +47,8 @@ namespace HNZ.TieredTechBlocks
 
         bool UsedUp => ForgeCount >= MaxForgeCount;
         TimeSpan? RemainingTime => _usedUpTime + TimeSpan.FromSeconds(AutoDeleteSecs) - DateTime.UtcNow;
+
+        string DebugName => $"{GetType().Name}, '{Block.CubeGrid.DisplayName}' ({Entity.EntityId})";
 
         FlashGpsSource GetFlashGpsSource()
         {
@@ -98,10 +101,10 @@ namespace HNZ.TieredTechBlocks
         public override void Close()
         {
             if (!MyAPIGateway.Session.IsServer) return;
-            Log.Info($"forge closed: {Block.CubeGrid.DisplayName}, {Entity.EntityId}");
 
+            Log.Info($"forge closed: {DebugName}");
+            Log.Info($"inventory: {GameUtils.GetAllInventoryItems(Entity).DicToString()}");
             GameUtils.DumpAllInventories(Entity);
-
             Core.Instance.GpsApi.Remove(GetFlashGpsSource().Id);
         }
 
@@ -112,6 +115,7 @@ namespace HNZ.TieredTechBlocks
             var remainingTime = RemainingTime;
             if (remainingTime.HasValue && remainingTime.Value <= TimeSpan.Zero)
             {
+                Log.Info($"forge times up: {DebugName}");
                 DestroyBlock();
                 return;
             }
@@ -144,6 +148,7 @@ namespace HNZ.TieredTechBlocks
                 // delete forges inside a safe zone
                 if (!GameUtils.IsDamageAllowed(Block.CubeGrid))
                 {
+                    Log.Info($"forge in safe zone: {DebugName}");
                     SendSafeZoneMessage();
                     DestroyBlock();
                 }
@@ -154,6 +159,7 @@ namespace HNZ.TieredTechBlocks
         {
             if (UsedUp) return;
 
+            var forged = false;
             var items = ListPool<MyInventoryItem>.Get();
             var inventory = Cargo.GetInventory(0);
             inventory.GetItems(items);
@@ -165,6 +171,7 @@ namespace HNZ.TieredTechBlocks
                     inventory.RemoveItems(item.ItemId, 1);
                     inventory.AddItems(1, builder);
                     ForgeCount += 1;
+                    forged = true;
                     break;
                 }
             }
@@ -175,10 +182,16 @@ namespace HNZ.TieredTechBlocks
             {
                 _usedUpTime = DateTime.UtcNow;
             }
+
+            if (forged)
+            {
+                Log.Info($"forge forged: {DebugName}, used up: {UsedUp}");
+            }
         }
 
         void DestroyBlock()
         {
+            Log.Info($"inventory: {GameUtils.GetAllInventoryItems(Entity).DicToString()}");
             GameUtils.DumpAllInventories(Entity);
             Block.CubeGrid.RemoveBlock(Block.SlimBlock, true);
         }
