@@ -11,7 +11,7 @@ namespace HNZ.TieredTechBlocks
         public string FactionTag;
 
         [XmlAttribute]
-        public string GridId;
+        public string SpawnGroupId;
 
         [XmlAttribute]
         public int Tier;
@@ -22,7 +22,7 @@ namespace HNZ.TieredTechBlocks
         public static CargoReplacement CreateDefault() => new CargoReplacement
         {
             FactionTag = "FOO",
-            GridId = "Bababooey",
+            SpawnGroupId = "Bababooey",
             Tier = 4,
             Chance = 0.2f,
         };

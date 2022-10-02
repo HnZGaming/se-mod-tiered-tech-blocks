@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using HNZ.Utils;
 using HNZ.Utils.Logging;
+using HNZ.Utils.MES;
 using HNZ.Utils.Pools;
 using Sandbox.Game;
 using Sandbox.ModAPI;
@@ -183,12 +184,9 @@ namespace HNZ.TieredTechBlocks
                 if (!ownerFactionTags.Contains(replacement.FactionTag)) continue;
 
                 // test grid id (if specified)
-                if (!string.IsNullOrEmpty(replacement.GridId))
+                if (!string.IsNullOrEmpty(replacement.SpawnGroupId))
                 {
-                    string gridId;
-                    var guid = Guid.Parse("5bca2eb0-1e0a-450d-a5ff-bd213b9654b4");
-                    if (!grid.TryGetStorageValue(guid, out gridId)) continue;
-                    if (gridId != replacement.GridId) continue;
+                    if (!NpcData.TestSpawnGroup(grid, replacement.SpawnGroupId)) continue;
                 }
 
                 // dice roll!
