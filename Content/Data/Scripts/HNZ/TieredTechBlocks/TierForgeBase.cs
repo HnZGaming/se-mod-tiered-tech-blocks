@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HNZ.FlashGps.Interface;
 using HNZ.Utils;
@@ -16,6 +17,7 @@ using VRage.Game.ModAPI.Ingame;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
+using IMyInventoryItem = VRage.Game.ModAPI.IMyInventoryItem;
 
 namespace HNZ.TieredTechBlocks
 {
@@ -129,7 +131,8 @@ namespace HNZ.TieredTechBlocks
 
             if (GameUtils.EverySeconds(0.1f))
             {
-                Core.Instance.GpsApi.AddOrUpdate(GetFlashGpsSource());
+                var gps = GetFlashGpsSource();
+                Core.Instance.GpsApi.AddOrUpdate(gps);
             }
 
             // make sure the block is "shared to all"
@@ -204,11 +207,23 @@ namespace HNZ.TieredTechBlocks
 
         void PutDataPad()
         {
+            var inventory = Cargo.GetInventory(0);
+
+            // don't add a new datapad if one already exists
+            var items = new List<MyInventoryItem>();
+            inventory.GetItems(items);
+            foreach (var item in items)
+            {
+                if (item.Type.SubtypeId == "Datapad")
+                {
+                    return;
+                }
+            }
+
             var builder = MyObjectBuilderSerializer.CreateNewObject<MyObjectBuilder_Datapad>("Datapad");
             builder.Name = $"{TierString} forge block description";
             builder.Data = string.Format(Config.Instance.DataPadDescription, TierString);
 
-            var inventory = Cargo.GetInventory(0);
             inventory.AddItems(1, builder);
         }
 
