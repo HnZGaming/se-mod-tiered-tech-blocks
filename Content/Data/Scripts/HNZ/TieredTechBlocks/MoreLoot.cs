@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using HNZ.Utils;
 using HNZ.Utils.Logging;
+using HNZ.Utils.MES;
 using HNZ.Utils.Pools;
 using Sandbox.Game;
 using Sandbox.ModAPI;
@@ -178,12 +180,20 @@ namespace HNZ.TieredTechBlocks
 
             foreach (var replacement in Config.Instance.CargoReplacements)
             {
-                if (ownerFactionTags.Contains(replacement.FactionTag) &&
-                    replacement.Chance >= MyUtils.GetRandomDouble(0, 1))
+                // test faction
+                if (!ownerFactionTags.Contains(replacement.FactionTag)) continue;
+
+                // test grid id (if specified)
+                if (!string.IsNullOrEmpty(replacement.SpawnGroupId))
                 {
-                    cargoReplacement = replacement;
-                    break;
+                    if (!NpcData.TestSpawnGroup(grid, replacement.SpawnGroupId)) continue;
                 }
+
+                // dice roll!
+                if (replacement.Chance < MyUtils.GetRandomDouble(0, 1)) continue;
+
+                cargoReplacement = replacement;
+                break;
             }
 
             SetPool<string>.Release(ownerFactionTags);

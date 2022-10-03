@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using HNZ.FlashGps.Interface;
 using HNZ.Utils;
 using HNZ.Utils.Logging;
@@ -15,6 +17,7 @@ using VRage.Game.ModAPI.Ingame;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
+using IMyInventoryItem = VRage.Game.ModAPI.IMyInventoryItem;
 
 namespace HNZ.TieredTechBlocks
 {
@@ -46,6 +49,8 @@ namespace HNZ.TieredTechBlocks
 
         bool UsedUp => ForgeCount >= MaxForgeCount;
         TimeSpan? RemainingTime => _usedUpTime + TimeSpan.FromSeconds(AutoDeleteSecs) - DateTime.UtcNow;
+
+        string DebugName => $"{GetType().Name}, '{Block.CubeGrid.DisplayName}' ({Entity.EntityId})";
 
         FlashGpsSource GetFlashGpsSource()
         {
@@ -98,10 +103,10 @@ namespace HNZ.TieredTechBlocks
         public override void Close()
         {
             if (!MyAPIGateway.Session.IsServer) return;
-            Log.Info($"forge closed: {Block.CubeGrid.DisplayName}, {Entity.EntityId}");
 
+            Log.Info($"forge closed: {DebugName}");
+            Log.Info($"inventory: {GameUtils.GetAllInventoryItems(Entity).DicToString()}");
             GameUtils.DumpAllInventories(Entity);
-
             Core.Instance.GpsApi.Remove(GetFlashGpsSource().Id);
         }
 
@@ -112,6 +117,7 @@ namespace HNZ.TieredTechBlocks
             var remainingTime = RemainingTime;
             if (remainingTime.HasValue && remainingTime.Value <= TimeSpan.Zero)
             {
+                Log.Info($"forge times up: {DebugName}");
                 DestroyBlock();
                 return;
             }
@@ -125,7 +131,8 @@ namespace HNZ.TieredTechBlocks
 
             if (GameUtils.EverySeconds(0.1f))
             {
-                Core.Instance.GpsApi.AddOrUpdate(GetFlashGpsSource());
+                var gps = GetFlashGpsSource();
+                Core.Instance.GpsApi.AddOrUpdate(gps);
             }
 
             // make sure the block is "shared to all"
@@ -144,6 +151,7 @@ namespace HNZ.TieredTechBlocks
                 // delete forges inside a safe zone
                 if (!GameUtils.IsDamageAllowed(Block.CubeGrid))
                 {
+                    Log.Info($"forge in safe zone: {DebugName}");
                     SendSafeZoneMessage();
                     DestroyBlock();
                 }
@@ -154,6 +162,7 @@ namespace HNZ.TieredTechBlocks
         {
             if (UsedUp) return;
 
+            var forged = false;
             var items = ListPool<MyInventoryItem>.Get();
             var inventory = Cargo.GetInventory(0);
             inventory.GetItems(items);
@@ -165,6 +174,7 @@ namespace HNZ.TieredTechBlocks
                     inventory.RemoveItems(item.ItemId, 1);
                     inventory.AddItems(1, builder);
                     ForgeCount += 1;
+                    forged = true;
                     break;
                 }
             }
@@ -175,10 +185,16 @@ namespace HNZ.TieredTechBlocks
             {
                 _usedUpTime = DateTime.UtcNow;
             }
+
+            if (forged)
+            {
+                Log.Info($"forge forged: {DebugName}, used up: {UsedUp}");
+            }
         }
 
         void DestroyBlock()
         {
+            Log.Info($"inventory: {GameUtils.GetAllInventoryItems(Entity).DicToString()}");
             GameUtils.DumpAllInventories(Entity);
             Block.CubeGrid.RemoveBlock(Block.SlimBlock, true);
         }
@@ -191,11 +207,23 @@ namespace HNZ.TieredTechBlocks
 
         void PutDataPad()
         {
+            var inventory = Cargo.GetInventory(0);
+
+            // don't add a new datapad if one already exists
+            var items = new List<MyInventoryItem>();
+            inventory.GetItems(items);
+            foreach (var item in items)
+            {
+                if (item.Type.SubtypeId == "Datapad")
+                {
+                    return;
+                }
+            }
+
             var builder = MyObjectBuilderSerializer.CreateNewObject<MyObjectBuilder_Datapad>("Datapad");
             builder.Name = $"{TierString} forge block description";
             builder.Data = string.Format(Config.Instance.DataPadDescription, TierString);
 
-            var inventory = Cargo.GetInventory(0);
             inventory.AddItems(1, builder);
         }
 

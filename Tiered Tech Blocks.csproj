@@ -573,6 +573,9 @@
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\Logger.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\LoggerManager.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\MathUtils.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\MES\MESApi.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\MES\MESGrid.cs" />
+    <Compile Include="Content\Data\Scripts\HNZ\Utils\MES\NpcData.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\ModStorageEntry.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\ObjectBuilderUtils.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\Pools\DictionaryPool.cs" />

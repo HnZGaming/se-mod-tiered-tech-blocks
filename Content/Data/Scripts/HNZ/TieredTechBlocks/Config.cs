@@ -82,12 +82,7 @@ namespace HNZ.TieredTechBlocks
             },
             CargoReplacements = new List<CargoReplacement>
             {
-                new CargoReplacement
-                {
-                    FactionTag = "PEAVER",
-                    Tier = 4,
-                    Chance = 0.2f,
-                },
+                CargoReplacement.CreateDefault(),
             },
             LogConfigs = new List<LogConfig>
             {
