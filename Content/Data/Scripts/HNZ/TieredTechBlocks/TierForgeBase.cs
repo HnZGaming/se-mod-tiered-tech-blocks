@@ -129,16 +129,19 @@ namespace HNZ.TieredTechBlocks
                 UpdateInventory();
             }
 
-            if (GameUtils.EverySeconds(0.1f))
+            if (GameUtils.EverySeconds(1f))
             {
                 var gps = GetFlashGpsSource();
                 Core.Instance.GpsApi.AddOrUpdate(gps);
             }
 
-            // make sure the block is "shared to all"
-            if (Block.IDModule?.ShareMode != MyOwnershipShareModeEnum.All)
+            if (GameUtils.EverySeconds(1f))
             {
-                Block.ChangeOwner(Block.OwnerId, MyOwnershipShareModeEnum.All);
+                // make sure the block is "shared to all"
+                if (Block.IDModule?.ShareMode != MyOwnershipShareModeEnum.All)
+                {
+                    Block.ChangeOwner(Block.OwnerId, MyOwnershipShareModeEnum.All);
+                }
             }
 
             if (LangUtils.RunOnce(ref _runOnce))
