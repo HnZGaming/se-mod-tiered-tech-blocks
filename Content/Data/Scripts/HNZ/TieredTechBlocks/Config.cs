@@ -24,13 +24,16 @@ namespace HNZ.TieredTechBlocks
         [XmlElement]
         public TechProperty Exotic;
 
-        [XmlElement]
-        public List<string> ExcludeGridNames;
+        [XmlArray]
+        [XmlArrayItem("item")]
+        public List<string> LootFactionTags;
 
-        [XmlElement]
-        public List<CargoReplacement> CargoReplacements;
+        [XmlArray]
+        [XmlArrayItem("item")]
+        public List<TierForgeSpec> ForgeSpecs;
 
-        [XmlElement]
+        [XmlArray]
+        [XmlArrayItem("item")]
         public List<LogConfig> LogConfigs;
 
         [XmlElement]
@@ -41,8 +44,8 @@ namespace HNZ.TieredTechBlocks
             LangUtils.AssertNull(Common);
             LangUtils.AssertNull(Rare);
             LangUtils.AssertNull(Exotic);
-            LangUtils.NullOrDefault(ref ExcludeGridNames, new List<string>());
-            LangUtils.NullOrDefault(ref CargoReplacements, new List<CargoReplacement>());
+            LangUtils.NullOrDefault(ref LootFactionTags, new List<string>());
+            LangUtils.NullOrDefault(ref ForgeSpecs, new List<TierForgeSpec>());
             LangUtils.NullOrDefault(ref LogConfigs, new List<LogConfig>());
             LangUtils.NullOrDefault(ref DataPadDescription, "");
         }
@@ -76,13 +79,13 @@ namespace HNZ.TieredTechBlocks
                 GpsRadius = -1,
                 MaxForgeCount = 30,
             },
-            ExcludeGridNames = new List<string>
+            LootFactionTags = new List<string>
             {
-                "respawn",
+                "FOO",
             },
-            CargoReplacements = new List<CargoReplacement>
+            ForgeSpecs = new List<TierForgeSpec>
             {
-                CargoReplacement.CreateDefault(),
+                TierForgeSpec.CreateDefault(),
             },
             LogConfigs = new List<LogConfig>
             {

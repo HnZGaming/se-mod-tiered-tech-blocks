@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using HNZ.FlashGps.Interface;
 using HNZ.Utils;
 using HNZ.Utils.Communications;
 using HNZ.Utils.Logging;
+using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
@@ -14,17 +16,19 @@ namespace HNZ.TieredTechBlocks
     [MySessionComponentDescriptor(MyUpdateOrder.BeforeSimulation)]
     public sealed class Core : MySessionComponentBase, ICommandListener
     {
-        public static Core Instance { get; private set; }
-
         static readonly Logger Log = LoggerManager.Create(nameof(Core));
+
+        public static Core Instance { get; private set; }
 
         bool _firstFramePassed;
         ContentFile<Config> _configFile;
-        MoreLoot _moreLoot;
+        TierTechInjector _techInjector;
+        TierForgeInjector _forgeInjector;
         ProtobufModule _protobufModule;
         CommandModule _commandModule;
         FlashGpsApi _flashGpsApi;
         Dictionary<string, Action<Command>> _serverCommands;
+        ConcurrentQueue<GridSpawn> _gridSpawns;
 
         public FlashGpsApi GpsApi => _flashGpsApi;
 
@@ -45,8 +49,11 @@ namespace HNZ.TieredTechBlocks
                         "Replace this mod with the original Tiered Tech Block mod.");
                 }
 
-                _moreLoot = new MoreLoot();
-                _moreLoot.LoadData();
+                _gridSpawns = new ConcurrentQueue<GridSpawn>();
+                MyVisualScriptLogicProvider.PrefabSpawnedDetailed += OnGridSpawned;
+
+                _techInjector = new TierTechInjector();
+                _forgeInjector = new TierForgeInjector();
 
                 _serverCommands = new Dictionary<string, Action<Command>>
                 {
@@ -74,9 +81,22 @@ namespace HNZ.TieredTechBlocks
 
         protected override void UnloadData()
         {
-            _moreLoot?.UnloadData();
             _protobufModule?.Close();
             _commandModule?.Close();
+
+            if (MyAPIGateway.Session.IsServer)
+            {
+                MyVisualScriptLogicProvider.PrefabSpawnedDetailed -= OnGridSpawned;
+            }
+        }
+
+        void OnGridSpawned(long entityId, string prefabName)
+        {
+            _gridSpawns.Enqueue(new GridSpawn
+            {
+                EntityId = entityId,
+                PrefabName = prefabName,
+            });
         }
 
         public override void UpdateBeforeSimulation()
@@ -92,7 +112,15 @@ namespace HNZ.TieredTechBlocks
                         (object o, ref MyDamageInformation info) => BeforeDamage(o, ref info));
                 }
 
-                _moreLoot.Update();
+                GridSpawn spawn;
+                while (_gridSpawns.TryDequeue(out spawn))
+                {
+                    var grid = MyAPIGateway.Entities.GetEntityById(spawn.EntityId) as IMyCubeGrid;
+                    if (grid?.Physics == null) continue; // grid is a projection or doesn't exist anymore
+
+                    _techInjector.TryInsertTechs(grid);
+                    _forgeInjector.TryInsertForge(grid);
+                }
             }
         }
 
@@ -115,7 +143,7 @@ namespace HNZ.TieredTechBlocks
             if (cargo == null) return;
 
             IMyCargoContainer smallCargo;
-            if (!MoreLoot.TryGetSmallCargo(cargo, out smallCargo)) return;
+            if (!Utils.TryGetSmallCargo(cargo, out smallCargo)) return;
 
             var ownerFactionTag = smallCargo.GetOwnerFactionTag();
             if (ownerFactionTag == null) return; // unowned block is exempt

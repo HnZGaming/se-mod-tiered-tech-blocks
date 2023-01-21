@@ -5,7 +5,7 @@ using HNZ.Utils;
 namespace HNZ.TieredTechBlocks
 {
     [Serializable]
-    public class CargoReplacement
+    public class TierForgeSpec
     {
         [XmlAttribute]
         public string FactionTag;
@@ -19,7 +19,7 @@ namespace HNZ.TieredTechBlocks
         [XmlAttribute]
         public float Chance;
 
-        public static CargoReplacement CreateDefault() => new CargoReplacement
+        public static TierForgeSpec CreateDefault() => new TierForgeSpec
         {
             FactionTag = "FOO",
             SpawnGroupId = "Bababooey",
