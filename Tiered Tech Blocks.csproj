@@ -544,7 +544,6 @@
     <Compile Include="Content\Data\Scripts\HNZ\FlashGps.Interface\FlashGpsSerialization.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\FlashGps.Interface\FlashGpsSource.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\CargoReplacement.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\CargoUpgradeHandler.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\Core.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\DefinitionUtils.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\MoreLoot.cs" />
@@ -554,7 +553,6 @@
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForge4x.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForge8x.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForgeBase.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\UpgradeHandler.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\AddRemoveObserver.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\BoundaryObserver.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\CharacterToPlayerLookup.cs" />
