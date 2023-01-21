@@ -14,8 +14,26 @@ namespace HNZ.TieredTechBlocks
 
         protected override bool CanForge(MyItemType itemType, out MyObjectBuilder_PhysicalObject builder)
         {
-            builder = DefinitionUtils.TechComp8xBuilder;
-            return DefinitionUtils.IsTech8xSource(itemType);
+            if (DefinitionUtils.IsTech8xSource(itemType))
+            {
+                builder = DefinitionUtils.TechComp8xBuilder;
+                return true;
+            }
+
+            if (DefinitionUtils.IsTech4xSource(itemType))
+            {
+                builder = DefinitionUtils.TechComp4xBuilder;
+                return true;
+            }
+
+            if (DefinitionUtils.IsTech2xSource(itemType))
+            {
+                builder = DefinitionUtils.TechComp2xBuilder;
+                return true;
+            }
+
+            builder = null;
+            return false;
         }
     }
 }
