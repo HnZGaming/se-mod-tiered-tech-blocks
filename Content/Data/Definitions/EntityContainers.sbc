@@ -135,6 +135,14 @@
             <InputConstraint IsWhitelist="true">
                 <Entry>
                     <TypeId>Component</TypeId>
+                    <SubtypeId>Tech2xSource</SubtypeId>
+                </Entry>
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>Tech2x</SubtypeId>
+                </Entry>
+                <Entry>
+                    <TypeId>Component</TypeId>
                     <SubtypeId>Tech4xSource</SubtypeId>
                 </Entry>
                 <Entry>
@@ -154,6 +162,22 @@
             </Id>
             <Volume>1</Volume>
             <InputConstraint IsWhitelist="true">
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>Tech2xSource</SubtypeId>
+                </Entry>
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>Tech2x</SubtypeId>
+                </Entry>
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>Tech4xSource</SubtypeId>
+                </Entry>
+                <Entry>
+                    <TypeId>Component</TypeId>
+                    <SubtypeId>Tech4x</SubtypeId>
+                </Entry>
                 <Entry>
                     <TypeId>Component</TypeId>
                     <SubtypeId>Tech8xSource</SubtypeId>
