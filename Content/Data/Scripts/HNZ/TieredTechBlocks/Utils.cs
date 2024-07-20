@@ -6,7 +6,7 @@ namespace HNZ.TieredTechBlocks
 {
     public static class Utils
     {
-        public static IEnumerable<IMyCargoContainer> GetVanillaCargoBlocks(IMyCubeGrid grid)
+        public static List<IMyCargoContainer> GetVanillaCargoBlocks(IMyCubeGrid grid)
         {
             var blocks = new List<IMySlimBlock>();
             var cargoBlocks = new List<IMyCargoContainer>();

@@ -9,6 +9,7 @@ using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
+using VRage.Utils;
 using VRageMath;
 
 namespace HNZ.TieredTechBlocks
@@ -120,6 +121,8 @@ namespace HNZ.TieredTechBlocks
                     var grid = MyAPIGateway.Entities.GetEntityById(spawn.EntityId) as IMyCubeGrid;
                     if (grid?.Physics == null) continue; // grid is a projection or doesn't exist anymore
 
+                    Log.Debug($"trying to inject techs/forges: '{grid.DisplayName}'");
+                    
                     _techInjector.TryInsertTechs(grid);
                     _forgeInjector.TryInsertForge(grid);
                 }
