@@ -77,6 +77,8 @@ namespace HNZ.TieredTechBlocks
             Config.Instance = _configFile.Content;
             Config.Instance.TryInitialize();
             LoggerManager.SetConfigs(Config.Instance.LogConfigs);
+            Log.Info("config reloaded");
+            Log.Info(_configFile.ToXml());
         }
 
         protected override void UnloadData()
