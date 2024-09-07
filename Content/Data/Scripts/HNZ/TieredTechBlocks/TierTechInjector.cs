@@ -46,13 +46,25 @@ namespace HNZ.TieredTechBlocks
 
         public void TryInsertTechs(IMyCubeGrid grid)
         {
+            Log.Debug($"trying to insert techs: '{grid.DisplayName}'");
+
             IMyFaction faction;
-            if (!grid.TryGetFaction(out faction)) return;
+            if (!grid.TryGetFaction(out faction))
+            {
+                Log.Debug("no faction assigned to grid");
+                return;
+            }
 
             var factionTag = faction.Tag;
-            if (!Config.Instance.LootFactionTags.Contains(factionTag)) return;
+            if (!Config.Instance.LootFactionTags.Contains(factionTag))
+            {
+                Log.Debug($"not a faction for techs: '{factionTag}'");
+                return;
+            }
 
             var cargoBlocks = Utils.GetVanillaCargoBlocks(grid);
+            Log.Debug($"injectable cargo blocks: {cargoBlocks.Count}");
+            
             foreach (var cargoBlock in cargoBlocks)
             foreach (var loot in _loots)
             {
