@@ -67,6 +67,7 @@ namespace HNZ.TieredTechBlocks
                     EntityId = Entity.EntityId,
                     Radius = 100,
                     DecaySeconds = 3,
+                    SuppressSound = true,
                 };
             }
             else
@@ -81,6 +82,7 @@ namespace HNZ.TieredTechBlocks
                     EntityId = Entity.EntityId,
                     Radius = GpsRadius,
                     DecaySeconds = 3,
+                    SuppressSound = true,
                 };
             }
         }
