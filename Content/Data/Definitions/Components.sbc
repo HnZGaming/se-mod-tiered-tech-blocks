@@ -29,6 +29,11 @@
 
             <MinimumAcquisitionAmount>20</MinimumAcquisitionAmount>
             <MaximumAcquisitionAmount>100</MaximumAcquisitionAmount>
+
+            <ExtraInventoryTooltipLine>
+                Component required to build tiered-tech blocks. 
+                Type !wiki in the chat for more details.
+            </ExtraInventoryTooltipLine>
         </Component>
         <Component>
             <Id>
@@ -58,6 +63,11 @@
 
             <MinimumAcquisitionAmount>10</MinimumAcquisitionAmount>
             <MaximumAcquisitionAmount>50</MaximumAcquisitionAmount>
+
+            <ExtraInventoryTooltipLine>
+                Component required to build tiered-tech blocks.
+                Type !wiki in the chat for more details.
+            </ExtraInventoryTooltipLine>
         </Component>
         <Component>
             <Id>
@@ -87,6 +97,11 @@
 
             <MinimumAcquisitionAmount>5</MinimumAcquisitionAmount>
             <MaximumAcquisitionAmount>25</MaximumAcquisitionAmount>
+
+            <ExtraInventoryTooltipLine>
+                Component required to build tiered-tech blocks.
+                Type !wiki in the chat for more details.
+            </ExtraInventoryTooltipLine>
         </Component>
         <Component>
             <Id>
@@ -115,6 +130,11 @@
             <CanPlayerOrder>true</CanPlayerOrder>
             <MinimumAcquisitionAmount>5</MinimumAcquisitionAmount>
             <MaximumAcquisitionAmount>25</MaximumAcquisitionAmount>
+            
+            <ExtraInventoryTooltipLine>
+                Component required to create tiered-tech components when you beat the boss. 
+                Type !wiki in the chat for more details.
+            </ExtraInventoryTooltipLine>
         </Component>
         <Component>
             <Id>
@@ -143,6 +163,11 @@
             <CanPlayerOrder>true</CanPlayerOrder>
             <MinimumAcquisitionAmount>5</MinimumAcquisitionAmount>
             <MaximumAcquisitionAmount>25</MaximumAcquisitionAmount>
+            
+            <ExtraInventoryTooltipLine>
+                Component required to create tiered-tech components when you beat the boss.
+                Type !wiki in the chat for more details.
+            </ExtraInventoryTooltipLine>
         </Component>
         <Component>
             <Id>
@@ -171,6 +196,11 @@
             <CanPlayerOrder>true</CanPlayerOrder>
             <MinimumAcquisitionAmount>5</MinimumAcquisitionAmount>
             <MaximumAcquisitionAmount>25</MaximumAcquisitionAmount>
+
+            <ExtraInventoryTooltipLine>
+                Component required to create tiered-tech components when you beat the boss.
+                Type !wiki in the chat for more details.
+            </ExtraInventoryTooltipLine>
         </Component>
         <Component>
             <Id>
