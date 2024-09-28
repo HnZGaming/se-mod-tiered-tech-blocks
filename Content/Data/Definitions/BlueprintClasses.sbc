@@ -31,20 +31,7 @@
             <HighlightIcon>Textures\component_focus.dds</HighlightIcon>
             <InputConstraintIcon>Textures\GUI\Icons\filter_ingot.dds</InputConstraintIcon>
         </Class>
-
-
-        <Class>
-            <Id>
-                <TypeId>BlueprintClassDefinition</TypeId>
-                <SubtypeId>StoneIncinerator</SubtypeId>
-            </Id>
-            <DisplayName>Stone only</DisplayName>
-            <Icon>Textures\GUI\Icons\buttons\large_block.dds</Icon>
-            <HighlightIcon>Textures\large_block_focus.dds</HighlightIcon>
-            <InputConstraintIcon>Textures\GUI\Icons\filter_ore.dds</InputConstraintIcon>
-            <OutputConstraintIcon>Textures\GUI\Icons\filter_ingot.dds</OutputConstraintIcon>
-        </Class>
-
+        
         <Class>
             <Id>
                 <TypeId>BlueprintClassDefinition</TypeId>
@@ -108,8 +95,6 @@
     </BlueprintClasses>
 
     <BlueprintClassEntries>
-        <Entry Class="StoneIncinerator" BlueprintSubtypeId="StoneOreToIngotIncinerate" />
-
         <Entry Class="TechAdmin" BlueprintSubtypeId="Tech2x" />
         <Entry Class="TechAdmin" BlueprintSubtypeId="Tech4x" />
         <Entry Class="TechAdmin" BlueprintSubtypeId="Tech8x" />

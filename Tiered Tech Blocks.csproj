@@ -66,7 +66,6 @@
     <None Include="Content\Data\Definitions\CubeBlocks_SafeZone.sbc" />
     <None Include="Content\Data\Definitions\CubeBlocks_SolarPanel.sbc" />
     <None Include="Content\Data\Definitions\CubeBlocks_Spotlight.sbc" />
-    <None Include="Content\Data\Definitions\CubeBlocks_StoneIncinerator.sbc" />
     <None Include="Content\Data\Definitions\CubeBlocks_SurvivalKit.sbc" />
     <None Include="Content\Data\Definitions\CubeBlocks_Warfare2.sbc" />
     <None Include="Content\Data\Definitions\CubeBlocks_Welder.sbc" />
@@ -407,8 +406,6 @@
     <Content Include="Content\Textures\SolarPanel2x.dds" />
     <Content Include="Content\Textures\SolarPanel4x.dds" />
     <Content Include="Content\Textures\SolarPanel8x.dds" />
-    <Content Include="Content\Textures\StoneIncinerator.dds" />
-    <Content Include="Content\Textures\StoneIncinerator.png" />
     <Content Include="Content\Textures\SurvivalKitLarge2x.dds" />
     <Content Include="Content\Textures\SurvivalKitLarge4x.dds" />
     <Content Include="Content\Textures\SurvivalKitLarge8x.dds" />
