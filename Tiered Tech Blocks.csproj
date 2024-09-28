@@ -74,7 +74,6 @@
     <None Include="Content\Data\Definitions\ResearchBlocks.sbc" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Data\Definitions\CubeBlocks_TierForge.sbc" />
     <Content Include="Content\Data\Definitions\ModStorageComponents.sbc" />
     <Content Include="Content\Overlays\2x.png" />
     <Content Include="Content\Overlays\4x.png" />
@@ -413,11 +412,8 @@
     <Content Include="Content\Textures\SurvivalKitSmall4x.dds" />
     <Content Include="Content\Textures\SurvivalKitSmall8x.dds" />
     <Content Include="Content\Textures\tech2x.dds" />
-    <Content Include="Content\Textures\tech2xsource.dds" />
     <Content Include="Content\Textures\tech4x.dds" />
-    <Content Include="Content\Textures\tech4xsource.dds" />
     <Content Include="Content\Textures\tech8x.dds" />
-    <Content Include="Content\Textures\tech8xSource.dds" />
     <Content Include="Content\Textures\techadmin.dds" />
     <Content Include="Content\Textures\techadmin.png" />
     <Content Include="Content\Textures\thrust2x.dds" />
@@ -537,21 +533,11 @@
     <Folder Include="Content" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Content\Data\Scripts\HNZ\FlashGps.Interface\FlashGpsApi.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\FlashGps.Interface\FlashGpsSerialization.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\FlashGps.Interface\FlashGpsSource.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\GridSpawn.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForgeSpec.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\Core.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\DefinitionUtils.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForgeInjector.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierTechInjector.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\Config.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TechProperty.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForge2x.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForge4x.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForge8x.cs" />
-    <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\TierForgeBase.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\TieredTechBlocks\Utils.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\AddRemoveObserver.cs" />
     <Compile Include="Content\Data\Scripts\HNZ\Utils\BoundaryObserver.cs" />

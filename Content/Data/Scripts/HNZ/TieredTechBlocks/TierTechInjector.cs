@@ -19,30 +19,35 @@ namespace HNZ.TieredTechBlocks
             public double Chance;
         }
 
-        readonly Loot[] _loots =
+        Loot[] _loots = Array.Empty<Loot>();
+
+        public void Update()
         {
-            new Loot
+            _loots = new[]
             {
-                Builder = DefinitionUtils.Tech2xBuilder,
-                Chance = Config.Instance.Common.Chance,
-                MinAmount = Config.Instance.Common.MinAmount,
-                MaxAmount = Config.Instance.Common.MaxAmount,
-            },
-            new Loot
-            {
-                Builder = DefinitionUtils.Tech4xBuilder,
-                Chance = Config.Instance.Rare.Chance,
-                MinAmount = Config.Instance.Rare.MinAmount,
-                MaxAmount = Config.Instance.Rare.MaxAmount,
-            },
-            new Loot
-            {
-                Builder = DefinitionUtils.Tech8xBuilder,
-                Chance = Config.Instance.Exotic.Chance,
-                MinAmount = Config.Instance.Exotic.MinAmount,
-                MaxAmount = Config.Instance.Exotic.MaxAmount,
-            },
-        };
+                new Loot
+                {
+                    Builder = new MyObjectBuilder_Component { SubtypeName = "Tech2x" },
+                    Chance = Config.Instance.Common.Chance,
+                    MinAmount = Config.Instance.Common.MinAmount,
+                    MaxAmount = Config.Instance.Common.MaxAmount,
+                },
+                new Loot
+                {
+                    Builder = new MyObjectBuilder_Component { SubtypeName = "Tech4x" },
+                    Chance = Config.Instance.Rare.Chance,
+                    MinAmount = Config.Instance.Rare.MinAmount,
+                    MaxAmount = Config.Instance.Rare.MaxAmount,
+                },
+                new Loot
+                {
+                    Builder = new MyObjectBuilder_Component { SubtypeName = "Tech8x" },
+                    Chance = Config.Instance.Exotic.Chance,
+                    MinAmount = Config.Instance.Exotic.MinAmount,
+                    MaxAmount = Config.Instance.Exotic.MaxAmount,
+                },
+            };
+        }
 
         public void TryInsertTechs(IMyCubeGrid grid)
         {
@@ -62,9 +67,9 @@ namespace HNZ.TieredTechBlocks
                 return;
             }
 
-            var cargoBlocks = Utils.GetVanillaCargoBlocks(grid);
+            var cargoBlocks = Utils.GetCargoBlocks(grid);
             Log.Debug($"injectable cargo blocks: {cargoBlocks.Count}");
-            
+
             foreach (var cargoBlock in cargoBlocks)
             foreach (var loot in _loots)
             {

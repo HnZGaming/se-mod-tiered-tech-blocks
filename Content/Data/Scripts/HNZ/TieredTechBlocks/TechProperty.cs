@@ -15,18 +15,10 @@ namespace HNZ.TieredTechBlocks
         [XmlAttribute]
         public int MaxAmount;
 
-        [XmlAttribute]
-        public int ForgeMod;
-
         // by meters
         //  0 -> no gps
         // -1 -> infinite gps (all players)
         [XmlAttribute]
         public int GpsRadius;
-
-        // by minutes
-        //  0 -> infinite
-        [XmlAttribute]
-        public int MaxForgeCount;
     }
 }
