@@ -23,21 +23,21 @@ namespace HNZ.TieredTechBlocks
         {
             new Loot
             {
-                Builder = DefinitionUtils.TechSource2xBuilder,
+                Builder = DefinitionUtils.Tech2xBuilder,
                 Chance = Config.Instance.Common.Chance,
                 MinAmount = Config.Instance.Common.MinAmount,
                 MaxAmount = Config.Instance.Common.MaxAmount,
             },
             new Loot
             {
-                Builder = DefinitionUtils.TechSource4xBuilder,
+                Builder = DefinitionUtils.Tech4xBuilder,
                 Chance = Config.Instance.Rare.Chance,
                 MinAmount = Config.Instance.Rare.MinAmount,
                 MaxAmount = Config.Instance.Rare.MaxAmount,
             },
             new Loot
             {
-                Builder = DefinitionUtils.TechSource8xBuilder,
+                Builder = DefinitionUtils.Tech8xBuilder,
                 Chance = Config.Instance.Exotic.Chance,
                 MinAmount = Config.Instance.Exotic.MinAmount,
                 MaxAmount = Config.Instance.Exotic.MaxAmount,

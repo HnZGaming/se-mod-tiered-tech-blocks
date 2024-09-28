@@ -11,15 +11,15 @@ namespace HNZ.TieredTechBlocks
         public static readonly MyObjectBuilder_PhysicalObject TechComp4xBuilder;
         public static readonly MyObjectBuilder_PhysicalObject TechComp8xBuilder;
 
-        public static readonly MyObjectBuilder_Component TechSource2xBuilder;
-        public static readonly MyObjectBuilder_Component TechSource4xBuilder;
-        public static readonly MyObjectBuilder_Component TechSource8xBuilder;
+        public static readonly MyObjectBuilder_Component Tech2xBuilder;
+        public static readonly MyObjectBuilder_Component Tech4xBuilder;
+        public static readonly MyObjectBuilder_Component Tech8xBuilder;
 
         static DefinitionUtils()
         {
-            TechSource2xBuilder = new MyObjectBuilder_Component { SubtypeName = "Tech2xSource" };
-            TechSource4xBuilder = new MyObjectBuilder_Component { SubtypeName = "Tech4xSource" };
-            TechSource8xBuilder = new MyObjectBuilder_Component { SubtypeName = "Tech8xSource" };
+            Tech2xBuilder = new MyObjectBuilder_Component { SubtypeName = "Tech2x" };
+            Tech4xBuilder = new MyObjectBuilder_Component { SubtypeName = "Tech4x" };
+            Tech8xBuilder = new MyObjectBuilder_Component { SubtypeName = "Tech8x" };
 
             ObjectBuilderUtils.TryCreatePhysicalObjectBuilder("Component", "Tech2x", out TechComp2xBuilder);
             ObjectBuilderUtils.TryCreatePhysicalObjectBuilder("Component", "Tech4x", out TechComp4xBuilder);
