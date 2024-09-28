@@ -7,6 +7,7 @@
                 <SubtypeId>Tech2xComponents</SubtypeId>
             </Id>
             <DisplayName>Enhanced Components</DisplayName>
+            <Description>Enhanced Components</Description>
             <Icon>Textures\GUI\Icons\buttons\component.dds</Icon>
             <HighlightIcon>Textures\component_focus.dds</HighlightIcon>
             <InputConstraintIcon>Textures\GUI\Icons\filter_ingot.dds</InputConstraintIcon>
@@ -17,6 +18,7 @@
                 <SubtypeId>Tech4xComponents</SubtypeId>
             </Id>
             <DisplayName>Proficient Components</DisplayName>
+            <Description>Proficient Components</Description>
             <Icon>Textures\GUI\Icons\buttons\component.dds</Icon>
             <HighlightIcon>Textures\component_focus.dds</HighlightIcon>
             <InputConstraintIcon>Textures\GUI\Icons\filter_ingot.dds</InputConstraintIcon>
@@ -27,6 +29,7 @@
                 <SubtypeId>Tech8xComponents</SubtypeId>
             </Id>
             <DisplayName>Elite Components</DisplayName>
+            <Description>Elite Components</Description>
             <Icon>Textures\GUI\Icons\buttons\component.dds</Icon>
             <HighlightIcon>Textures\component_focus.dds</HighlightIcon>
             <InputConstraintIcon>Textures\GUI\Icons\filter_ingot.dds</InputConstraintIcon>
@@ -95,9 +98,15 @@
     </BlueprintClasses>
 
     <BlueprintClassEntries>
-        <Entry Class="TechAdmin" BlueprintSubtypeId="Tech2x" />
-        <Entry Class="TechAdmin" BlueprintSubtypeId="Tech4x" />
-        <Entry Class="TechAdmin" BlueprintSubtypeId="Tech8x" />
+        <Entry Class="Components" BlueprintSubtypeId="Tech2x" />
+        <Entry Class="Tech2xComponents" BlueprintSubtypeId="Tech2x" />
+        <Entry Class="Tech2xComponents" BlueprintSubtypeId="Tech4x" />
+        <Entry Class="Tech4xComponents" BlueprintSubtypeId="Tech2x" />
+        <Entry Class="Tech4xComponents" BlueprintSubtypeId="Tech4x" />
+        <Entry Class="Tech4xComponents" BlueprintSubtypeId="Tech8x" />
+        <Entry Class="Tech8xComponents" BlueprintSubtypeId="Tech2x" />
+        <Entry Class="Tech8xComponents" BlueprintSubtypeId="Tech4x" />
+        <Entry Class="Tech8xComponents" BlueprintSubtypeId="Tech8x" />
 
         <Entry Class="BasicComponents2" BlueprintSubtypeId="SolarCell" />
         <Entry Class="BasicComponents2" BlueprintSubtypeId="SteelPlate" />

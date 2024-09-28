@@ -59,6 +59,7 @@
                 <Class>LargeBlocks</Class>
                 <Class>SmallBlocks</Class>
                 <Class>Components</Class>
+                <Class>Tech2xComponents</Class>
                 <Class>EliteTools</Class>
                 <Class>BuildPlanner</Class>
                 <Class>EliteConsumables</Class>
@@ -130,6 +131,7 @@
                 <Class>LargeBlocks</Class>
                 <Class>SmallBlocks</Class>
                 <Class>Components</Class>
+                <Class>Tech4xComponents</Class>
                 <Class>EliteTools</Class>
                 <Class>BuildPlanner</Class>
                 <Class>EliteConsumables</Class>
@@ -203,6 +205,7 @@
                 <Class>LargeBlocks</Class>
                 <Class>SmallBlocks</Class>
                 <Class>Components</Class>
+                <Class>Tech8xComponents</Class>
                 <Class>EliteTools</Class>
                 <Class>BuildPlanner</Class>
                 <Class>EliteConsumables</Class>
