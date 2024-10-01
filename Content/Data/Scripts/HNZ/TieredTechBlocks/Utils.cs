@@ -6,7 +6,7 @@ namespace HNZ.TieredTechBlocks
 {
     public static class Utils
     {
-        public static List<IMyCargoContainer> GetVanillaCargoBlocks(IMyCubeGrid grid)
+        public static List<IMyCargoContainer> GetCargoBlocks(IMyCubeGrid grid)
         {
             var blocks = new List<IMySlimBlock>();
             var cargoBlocks = new List<IMyCargoContainer>();
@@ -15,7 +15,7 @@ namespace HNZ.TieredTechBlocks
             foreach (var block in blocks)
             {
                 IMyCargoContainer cargoBlock;
-                if (TryGetVanillaCargoBlock(block, out cargoBlock))
+                if (TryGetCargoBlock(block, out cargoBlock))
                 {
                     cargoBlocks.Add(cargoBlock);
                 }
@@ -24,13 +24,12 @@ namespace HNZ.TieredTechBlocks
             return cargoBlocks;
         }
 
-        static bool TryGetVanillaCargoBlock(IMySlimBlock block, out IMyCargoContainer cargo)
+        static bool TryGetCargoBlock(IMySlimBlock block, out IMyCargoContainer cargo)
         {
             cargo = block.FatBlock as IMyCargoContainer;
             if (cargo == null) return false;
             if (cargo.MarkedForClose) return false;
             if (!cargo.IsWorking) return false;
-            if (cargo.Components.Has<TierForgeBase>()) return false;
             return true;
         }
 

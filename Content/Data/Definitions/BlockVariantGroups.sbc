@@ -23,18 +23,6 @@
         </BlockVariantGroup>
 
         <BlockVariantGroup>
-            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="TrashCanGroup" />
-            <Icon>Textures\StoneIncinerator.dds</Icon>
-            <DisplayName>Stone Incinerator</DisplayName>
-            <Description>Rapidly vaporizes Stone leaving only trace amounts of ressources.</Description>
-            <Blocks>
-                <Block Type="MyObjectBuilder_Refinery" Subtype="StoneIncinerator" />
-                <Block Type="MyObjectBuilder_Refinery" Subtype="StoneIncineratorSmall" />
-<!--                <Block Type="MyObjectBuilder_CargoContainer" Subtype="LargeTrashCan" />-->
-            </Blocks>
-        </BlockVariantGroup>
-
-        <BlockVariantGroup>
             <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="AssemblerGroup" />
             <Icon>Textures\GUI\Icons\Cubes\assembler.dds</Icon>
             <DisplayName>DisplayName_Block_Assembler</DisplayName>

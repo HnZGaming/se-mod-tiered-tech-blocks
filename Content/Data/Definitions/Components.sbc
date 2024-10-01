@@ -20,7 +20,7 @@
             <MaxIntegrity>500</MaxIntegrity>
             <DropProbability>0.5</DropProbability>
             <Health>1000</Health>
-            <MinimalPricePerUnit>100000</MinimalPricePerUnit>
+            <MinimalPricePerUnit>200000</MinimalPricePerUnit>
             <MinimumOfferAmount>10</MinimumOfferAmount>
             <MaximumOfferAmount>500</MaximumOfferAmount>
             <MinimumOrderAmount>10</MinimumOrderAmount>
@@ -54,7 +54,7 @@
             <MaxIntegrity>500</MaxIntegrity>
             <DropProbability>0.5</DropProbability>
             <Health>2000</Health>
-            <MinimalPricePerUnit>200000</MinimalPricePerUnit>
+            <MinimalPricePerUnit>400000</MinimalPricePerUnit>
             <MinimumOfferAmount>5</MinimumOfferAmount>
             <MaximumOfferAmount>250</MaximumOfferAmount>
             <MinimumOrderAmount>5</MinimumOrderAmount>
@@ -88,7 +88,7 @@
             <MaxIntegrity>500</MaxIntegrity>
             <DropProbability>0.5</DropProbability>
             <Health>4000</Health>
-            <MinimalPricePerUnit>400000</MinimalPricePerUnit>
+            <MinimalPricePerUnit>800000</MinimalPricePerUnit>
             <MinimumOfferAmount>2</MinimumOfferAmount>
             <MaximumOfferAmount>125</MaximumOfferAmount>
             <MinimumOrderAmount>2</MinimumOrderAmount>
@@ -100,105 +100,6 @@
 
             <ExtraInventoryTooltipLine>
                 Component required to build tiered-tech blocks.
-                Type !wiki in the chat for more details.
-            </ExtraInventoryTooltipLine>
-        </Component>
-        <Component>
-            <Id>
-                <TypeId>Component</TypeId>
-                <SubtypeId>Tech2xSource</SubtypeId>
-            </Id>
-            <DisplayName>Common Tech Source</DisplayName>
-            <Icon>Textures\tech2xSource.dds</Icon>
-            <Size>
-                <X>1</X>
-                <Y>0.7</Y>
-                <Z>0.4</Z>
-            </Size>
-            <Mass>70</Mass>
-            <Volume>5</Volume>
-            <Model>Models\Components\gravity_generator_components_component.mwm</Model>
-            <PhysicalMaterial>Metal</PhysicalMaterial>
-            <MaxIntegrity>500</MaxIntegrity>
-            <DropProbability>0.5</DropProbability>
-            <Health>4000</Health>
-            <MinimalPricePerUnit>10000</MinimalPricePerUnit>
-            <MinimumOfferAmount>2</MinimumOfferAmount>
-            <MaximumOfferAmount>125</MaximumOfferAmount>
-            <MinimumOrderAmount>2</MinimumOrderAmount>
-            <MaximumOrderAmount>125</MaximumOrderAmount>
-            <CanPlayerOrder>true</CanPlayerOrder>
-            <MinimumAcquisitionAmount>5</MinimumAcquisitionAmount>
-            <MaximumAcquisitionAmount>25</MaximumAcquisitionAmount>
-            
-            <ExtraInventoryTooltipLine>
-                Component required to create tiered-tech components when you beat the boss. 
-                Type !wiki in the chat for more details.
-            </ExtraInventoryTooltipLine>
-        </Component>
-        <Component>
-            <Id>
-                <TypeId>Component</TypeId>
-                <SubtypeId>Tech4xSource</SubtypeId>
-            </Id>
-            <DisplayName>Rare Tech Source</DisplayName>
-            <Icon>Textures\tech4xSource.dds</Icon>
-            <Size>
-                <X>1</X>
-                <Y>0.7</Y>
-                <Z>0.4</Z>
-            </Size>
-            <Mass>70</Mass>
-            <Volume>5</Volume>
-            <Model>Models\Components\gravity_generator_components_component.mwm</Model>
-            <PhysicalMaterial>Metal</PhysicalMaterial>
-            <MaxIntegrity>500</MaxIntegrity>
-            <DropProbability>0.5</DropProbability>
-            <Health>4000</Health>
-            <MinimalPricePerUnit>20000</MinimalPricePerUnit>
-            <MinimumOfferAmount>2</MinimumOfferAmount>
-            <MaximumOfferAmount>125</MaximumOfferAmount>
-            <MinimumOrderAmount>2</MinimumOrderAmount>
-            <MaximumOrderAmount>125</MaximumOrderAmount>
-            <CanPlayerOrder>true</CanPlayerOrder>
-            <MinimumAcquisitionAmount>5</MinimumAcquisitionAmount>
-            <MaximumAcquisitionAmount>25</MaximumAcquisitionAmount>
-            
-            <ExtraInventoryTooltipLine>
-                Component required to create tiered-tech components when you beat the boss.
-                Type !wiki in the chat for more details.
-            </ExtraInventoryTooltipLine>
-        </Component>
-        <Component>
-            <Id>
-                <TypeId>Component</TypeId>
-                <SubtypeId>Tech8xSource</SubtypeId>
-            </Id>
-            <DisplayName>Exotic Tech Source</DisplayName>
-            <Icon>Textures\tech8xSource.dds</Icon>
-            <Size>
-                <X>1</X>
-                <Y>0.7</Y>
-                <Z>0.4</Z>
-            </Size>
-            <Mass>70</Mass>
-            <Volume>5</Volume>
-            <Model>Models\Components\gravity_generator_components_component.mwm</Model>
-            <PhysicalMaterial>Metal</PhysicalMaterial>
-            <MaxIntegrity>500</MaxIntegrity>
-            <DropProbability>0.5</DropProbability>
-            <Health>4000</Health>
-            <MinimalPricePerUnit>40000</MinimalPricePerUnit>
-            <MinimumOfferAmount>2</MinimumOfferAmount>
-            <MaximumOfferAmount>125</MaximumOfferAmount>
-            <MinimumOrderAmount>2</MinimumOrderAmount>
-            <MaximumOrderAmount>125</MaximumOrderAmount>
-            <CanPlayerOrder>true</CanPlayerOrder>
-            <MinimumAcquisitionAmount>5</MinimumAcquisitionAmount>
-            <MaximumAcquisitionAmount>25</MaximumAcquisitionAmount>
-
-            <ExtraInventoryTooltipLine>
-                Component required to create tiered-tech components when you beat the boss.
                 Type !wiki in the chat for more details.
             </ExtraInventoryTooltipLine>
         </Component>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using HNZ.FlashGps.Interface;
 using HNZ.Utils;
 using HNZ.Utils.Communications;
 using HNZ.Utils.Logging;
@@ -9,7 +8,6 @@ using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
-using VRage.Utils;
 using VRageMath;
 
 namespace HNZ.TieredTechBlocks
@@ -24,14 +22,10 @@ namespace HNZ.TieredTechBlocks
         bool _firstFramePassed;
         ContentFile<Config> _configFile;
         TierTechInjector _techInjector;
-        TierForgeInjector _forgeInjector;
         ProtobufModule _protobufModule;
         CommandModule _commandModule;
-        FlashGpsApi _flashGpsApi;
         Dictionary<string, Action<Command>> _serverCommands;
         ConcurrentQueue<GridSpawn> _gridSpawns;
-
-        public FlashGpsApi GpsApi => _flashGpsApi;
 
         public override void LoadData()
         {
@@ -41,6 +35,7 @@ namespace HNZ.TieredTechBlocks
 
             if (MyAPIGateway.Session.IsServer)
             {
+                _techInjector = new TierTechInjector();
                 ReloadConfig();
 
                 if (!Config.Instance.AgreeToKeepThisModPrivate)
@@ -53,8 +48,6 @@ namespace HNZ.TieredTechBlocks
                 _gridSpawns = new ConcurrentQueue<GridSpawn>();
                 MyVisualScriptLogicProvider.PrefabSpawnedDetailed += OnGridSpawned;
 
-                _techInjector = new TierTechInjector();
-                _forgeInjector = new TierForgeInjector();
 
                 _serverCommands = new Dictionary<string, Action<Command>>
                 {
@@ -67,8 +60,6 @@ namespace HNZ.TieredTechBlocks
 
             _commandModule = new CommandModule(_protobufModule, 1, "ttb", this);
             _commandModule.Initialize();
-
-            _flashGpsApi = new FlashGpsApi(nameof(TieredTechBlocks).GetHashCode());
         }
 
         void ReloadConfig()
@@ -78,6 +69,7 @@ namespace HNZ.TieredTechBlocks
             Config.Instance = _configFile.Content;
             Config.Instance.TryInitialize();
             LoggerManager.SetConfigs(Config.Instance.LogConfigs);
+            _techInjector.Update();
             Log.Info("config reloaded");
             Log.Info(_configFile.ToXml());
         }
@@ -122,9 +114,8 @@ namespace HNZ.TieredTechBlocks
                     if (grid?.Physics == null) continue; // grid is a projection or doesn't exist anymore
 
                     Log.Debug($"trying to inject techs/forges: '{grid.DisplayName}'");
-                    
+
                     _techInjector.TryInsertTechs(grid);
-                    _forgeInjector.TryInsertForge(grid);
                 }
             }
         }
@@ -133,10 +124,6 @@ namespace HNZ.TieredTechBlocks
         {
             var block = target as IMySlimBlock;
             if (block == null) return;
-
-            // forge
-            var forge = block.FatBlock?.GameLogic?.GetAs<TierForgeBase>();
-            forge?.BeforeDamage(ref info);
 
             // loot
             BeforeDamageLoot(block, ref info);
