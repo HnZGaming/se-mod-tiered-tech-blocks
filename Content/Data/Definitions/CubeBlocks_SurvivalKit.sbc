@@ -50,10 +50,12 @@
         <ScreenArea Name="CockpitScreen_02" DisplayName="Bottom panel" />
       </ScreenAreas>
       <BlueprintClasses>
-        <Class>Tools</Class>
-        <Class>BasicComponents2</Class>
-        <Class>Consumables</Class>
         <Class>OreToIngotT1</Class>
+        <Class>BasicComponents2</Class>
+        <Class>BasicEquipment</Class>
+        <Class>Tools</Class>
+        <Class>BasicWeapons</Class>
+        <Class>Consumables</Class>
       </BlueprintClasses>
       <AssemblySpeed>0.5</AssemblySpeed>
 
@@ -122,10 +124,12 @@
       <BuildTimeSeconds>30</BuildTimeSeconds>
       <ResourceSinkGroup>Factory</ResourceSinkGroup>
       <BlueprintClasses>
-        <Class>Tools</Class>
-        <Class>BasicComponents2</Class>
-        <Class>Consumables</Class>
         <Class>OreToIngotT1</Class>
+        <Class>BasicComponents2</Class>
+        <Class>BasicEquipment</Class>
+        <Class>Tools</Class>
+        <Class>BasicWeapons</Class>
+        <Class>Consumables</Class>
       </BlueprintClasses>
       <AssemblySpeed>0.5</AssemblySpeed>
       <ScreenAreas>
@@ -203,10 +207,12 @@
         <ScreenArea Name="CockpitScreen_02" DisplayName="Bottom panel" />
       </ScreenAreas>
       <BlueprintClasses>
-        <Class>Tools</Class>
-        <Class>SimpleComponents</Class>
-        <Class>Consumables</Class>
         <Class>OreToIngotT2</Class>
+        <Class>SimpleComponents</Class>
+        <Class>BasicEquipment</Class>
+        <Class>Tools</Class>
+        <Class>BasicWeapons</Class>
+        <Class>Consumables</Class>
       </BlueprintClasses>
       <AssemblySpeed>0.7</AssemblySpeed>
 
@@ -275,10 +281,12 @@
       <BuildTimeSeconds>45</BuildTimeSeconds>
       <ResourceSinkGroup>Factory</ResourceSinkGroup>
       <BlueprintClasses>
-        <Class>Tools</Class>
-        <Class>SimpleComponents</Class>
-        <Class>Consumables</Class>
         <Class>OreToIngotT2</Class>
+        <Class>SimpleComponents</Class>
+        <Class>BasicEquipment</Class>
+        <Class>Tools</Class>
+        <Class>BasicWeapons</Class>
+        <Class>Consumables</Class>
       </BlueprintClasses>
       <AssemblySpeed>0.7</AssemblySpeed>
       <ScreenAreas>
@@ -355,10 +363,12 @@
         <ScreenArea Name="CockpitScreen_02" DisplayName="Bottom panel" />
       </ScreenAreas>
       <BlueprintClasses>
-        <Class>EliteTools</Class>
-        <Class>Components</Class>
-        <Class>EliteConsumables</Class>
         <Class>OreToIngotT3</Class>
+        <Class>EliteConsumables</Class>
+        <Class>BasicEquipment</Class>
+        <Class>EliteTools</Class>
+        <Class>BasicWeapons</Class>
+        <Class>Components</Class>
       </BlueprintClasses>
       <AssemblySpeed>1</AssemblySpeed>
 
@@ -427,10 +437,12 @@
       <BuildTimeSeconds>68</BuildTimeSeconds>
       <ResourceSinkGroup>Factory</ResourceSinkGroup>
       <BlueprintClasses>
-        <Class>EliteTools</Class>
-        <Class>Components</Class>
-        <Class>EliteConsumables</Class>
         <Class>OreToIngotT3</Class>
+        <Class>Components</Class>
+        <Class>BasicEquipment</Class>
+        <Class>EliteTools</Class>
+        <Class>BasicWeapons</Class>
+        <Class>EliteConsumables</Class>
       </BlueprintClasses>
       <AssemblySpeed>1</AssemblySpeed>
       <ScreenAreas>
