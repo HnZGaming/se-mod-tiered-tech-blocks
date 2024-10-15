@@ -60,9 +60,11 @@
                 <Class>SmallBlocks</Class>
                 <Class>Components</Class>
                 <Class>Tech2xComponents</Class>
+                <Class>EliteEquipment</Class>
                 <Class>EliteTools</Class>
-                <Class>BuildPlanner</Class>
+                <Class>EliteWeapons</Class>
                 <Class>EliteConsumables</Class>
+                <Class>BuildPlanner</Class>
             </BlueprintClasses>
             <DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
             <DamagedSound>ParticleHeavyMech</DamagedSound>
@@ -132,9 +134,11 @@
                 <Class>SmallBlocks</Class>
                 <Class>Components</Class>
                 <Class>Tech4xComponents</Class>
+                <Class>EliteEquipment</Class>
                 <Class>EliteTools</Class>
-                <Class>BuildPlanner</Class>
+                <Class>EliteWeapons</Class>
                 <Class>EliteConsumables</Class>
+                <Class>BuildPlanner</Class>
             </BlueprintClasses>
             <DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
             <DamagedSound>ParticleHeavyMech</DamagedSound>
@@ -206,9 +210,11 @@
                 <Class>SmallBlocks</Class>
                 <Class>Components</Class>
                 <Class>Tech8xComponents</Class>
+                <Class>EliteEquipment</Class>
                 <Class>EliteTools</Class>
-                <Class>BuildPlanner</Class>
+                <Class>EliteWeapons</Class>
                 <Class>EliteConsumables</Class>
+                <Class>BuildPlanner</Class>
             </BlueprintClasses>
             <DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
             <DamagedSound>ParticleHeavyMech</DamagedSound>
