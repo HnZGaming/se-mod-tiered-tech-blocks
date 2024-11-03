@@ -12,7 +12,7 @@
                 <Item Amount="600" TypeId="Component" SubtypeId="Superconductor"/>
             </Prerequisites>
             <Result Amount="1" TypeId="Component" SubtypeId="Tech2x"/>
-            <BaseProductionTimeInSeconds>0.001</BaseProductionTimeInSeconds>
+            <BaseProductionTimeInSeconds>600</BaseProductionTimeInSeconds>
         </Blueprint>
         <Blueprint>
             <Id>
@@ -25,7 +25,7 @@
                 <Item Amount="30" TypeId="Component" SubtypeId="Tech2x"/>
             </Prerequisites>
             <Result Amount="1" TypeId="Component" SubtypeId="Tech4x"/>
-            <BaseProductionTimeInSeconds>0.0005</BaseProductionTimeInSeconds>
+            <BaseProductionTimeInSeconds>1200</BaseProductionTimeInSeconds>
         </Blueprint>
         <Blueprint>
             <Id>
@@ -38,7 +38,7 @@
                 <Item Amount="30" TypeId="Component" SubtypeId="Tech4x"/>
             </Prerequisites>
             <Result Amount="1" TypeId="Component" SubtypeId="Tech8x"/>
-            <BaseProductionTimeInSeconds>0.0002</BaseProductionTimeInSeconds>
+            <BaseProductionTimeInSeconds>2400</BaseProductionTimeInSeconds>
         </Blueprint>
 
         <Blueprint>
