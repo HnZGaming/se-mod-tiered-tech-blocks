@@ -209,9 +209,9 @@
       <BlueprintClasses>
         <Class>OreToIngotT2</Class>
         <Class>SimpleComponents</Class>
-        <Class>BasicEquipment</Class>
+        <Class>SimpleEquipment</Class>
         <Class>Tools</Class>
-        <Class>BasicWeapons</Class>
+        <Class>SimpleWeapons</Class>
         <Class>Consumables</Class>
       </BlueprintClasses>
       <AssemblySpeed>0.7</AssemblySpeed>
@@ -283,9 +283,9 @@
       <BlueprintClasses>
         <Class>OreToIngotT2</Class>
         <Class>SimpleComponents</Class>
-        <Class>BasicEquipment</Class>
+        <Class>SimpleEquipment</Class>
         <Class>Tools</Class>
-        <Class>BasicWeapons</Class>
+        <Class>SimpleWeapons</Class>
         <Class>Consumables</Class>
       </BlueprintClasses>
       <AssemblySpeed>0.7</AssemblySpeed>
@@ -364,11 +364,11 @@
       </ScreenAreas>
       <BlueprintClasses>
         <Class>OreToIngotT3</Class>
-        <Class>EliteConsumables</Class>
-        <Class>BasicEquipment</Class>
-        <Class>EliteTools</Class>
-        <Class>BasicWeapons</Class>
         <Class>Components</Class>
+        <Class>EliteEquipment</Class>
+        <Class>EliteTools</Class>
+        <Class>EliteWeapons</Class>
+        <Class>EliteConsumables</Class>
       </BlueprintClasses>
       <AssemblySpeed>1</AssemblySpeed>
 
@@ -439,9 +439,9 @@
       <BlueprintClasses>
         <Class>OreToIngotT3</Class>
         <Class>Components</Class>
-        <Class>BasicEquipment</Class>
+        <Class>EliteEquipment</Class>
         <Class>EliteTools</Class>
-        <Class>BasicWeapons</Class>
+        <Class>EliteWeapons</Class>
         <Class>EliteConsumables</Class>
       </BlueprintClasses>
       <AssemblySpeed>1</AssemblySpeed>
