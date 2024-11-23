@@ -122,16 +122,7 @@ namespace HNZ.TieredTechBlocks
 
         static void BeforeDamage(object target, ref MyDamageInformation info)
         {
-            var block = target as IMySlimBlock;
-            if (block == null) return;
-
-            // loot
-            BeforeDamageLoot(block, ref info);
-        }
-
-        static void BeforeDamageLoot(IMySlimBlock target, ref MyDamageInformation info)
-        {
-            var cargo = target.FatBlock as IMyCargoContainer;
+            var cargo = (target as IMySlimBlock)?.FatBlock as IMyCargoContainer;
             if (cargo == null) return;
 
             IMyCargoContainer smallCargo;
