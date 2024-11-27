@@ -69,6 +69,7 @@
             <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <SensorRadius>3</SensorRadius>
+            <SensorOffset>1.6</SensorOffset>
             <PCU>100</PCU>
             <IsAirTight>false</IsAirTight>
 
@@ -138,6 +139,7 @@
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <SensorRadius>4</SensorRadius>
+            <SensorOffset>1.6</SensorOffset>
             <PCU>100</PCU>
 
         </Definition>
@@ -210,6 +212,7 @@
             <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <SensorRadius>6</SensorRadius>
+            <SensorOffset>5</SensorOffset>
             <PCU>100</PCU>
             <IsAirTight>false</IsAirTight>
 
@@ -279,6 +282,7 @@
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <SensorRadius>8</SensorRadius>
+            <SensorOffset>5</SensorOffset>
             <PCU>100</PCU>
 
         </Definition>
@@ -351,6 +355,7 @@
             <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <SensorRadius>12</SensorRadius>
+            <SensorOffset>11.6</SensorOffset>
             <PCU>100</PCU>
             <IsAirTight>false</IsAirTight>
 
@@ -420,6 +425,7 @@
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <SensorRadius>16</SensorRadius>
+            <SensorOffset>11</SensorOffset>
             <PCU>100</PCU>
 
         </Definition>
