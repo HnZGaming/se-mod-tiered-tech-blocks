@@ -187,5 +187,40 @@
             <BaseProductionTimeInSeconds>200</BaseProductionTimeInSeconds>
             <Priority>1000</Priority>
         </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>ScrapToIngotCraft</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_IronIngot</DisplayName>
+            <Icon>Textures\GUI\Icons\component\ScrapMetalComponent.dds</Icon>
+            <Prerequisites>
+                <Item Amount="2" TypeId="Ore" SubtypeId="Scrap" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="Ingot" SubtypeId="Iron" />
+            <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+            <Priority>1000</Priority>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>StoneOreToIngotBasic</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_BlueprintClass_Ingots</DisplayName>
+            <Icon>Textures\GUI\Icons\ingot\ingot_class.dds</Icon>
+            <Prerequisites>
+                <Item Amount="100" TypeId="Ore" SubtypeId="Stone" />
+            </Prerequisites>
+            <Results>
+                <Item Amount="4.8" TypeId="Ingot" SubtypeId="Stone" />
+                <Item Amount="12" TypeId="Ingot" SubtypeId="Iron" />
+                <Item Amount="3" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="6" TypeId="Ingot" SubtypeId="Silicon" />
+            </Results>
+            <Priority>1000</Priority>
+            <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+        </Blueprint>
     </Blueprints>
 </Definitions>
