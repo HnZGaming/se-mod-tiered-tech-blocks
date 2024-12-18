@@ -34,7 +34,7 @@
             <HighlightIcon>Textures\component_focus.dds</HighlightIcon>
             <InputConstraintIcon>Textures\GUI\Icons\filter_ingot.dds</InputConstraintIcon>
         </Class>
-        
+
         <Class>
             <Id>
                 <TypeId>BlueprintClassDefinition</TypeId>
@@ -139,6 +139,7 @@
         <Entry Class="OreToIngotT3" BlueprintSubtypeId="GoldOreToIngotCraft" />
         <Entry Class="OreToIngotT3" BlueprintSubtypeId="PlatinumOreToIngotCraft" />
         <Entry Class="OreToIngotT3" BlueprintSubtypeId="UraniumOreToIngotCraft" />
+        <Entry Class="OreToIngotT3" BlueprintSubtypeId="ScrapToIngotCraft" />
     </BlueprintClassEntries>
 
 
