@@ -528,7 +528,7 @@
 
       <BlockVariantGroup>
             <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="ThrusterSciFiIonGroup" />
-            <Icon>Textures\GUI\Icons\Cubes\LargeBlockLargeFlatAtmosphericThrust.dds</Icon>
+            <Icon>Textures\GUI\Icons\Cubes\large_IonThrusterLarge_SciFi.dds</Icon>
             <DisplayName>Flat Atmospheric Thruster</DisplayName>
             <Description>Description_IonThrust</Description>
             <Blocks>
