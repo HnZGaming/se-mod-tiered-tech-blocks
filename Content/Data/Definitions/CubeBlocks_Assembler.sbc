@@ -59,7 +59,6 @@
                 <Class>LargeBlocks</Class>
                 <Class>SmallBlocks</Class>
                 <Class>Components</Class>
-                <Class>Tech2xComponents</Class>
                 <Class>EliteEquipment</Class>
                 <Class>EliteTools</Class>
                 <Class>EliteWeapons</Class>
@@ -133,7 +132,6 @@
                 <Class>LargeBlocks</Class>
                 <Class>SmallBlocks</Class>
                 <Class>Components</Class>
-                <Class>Tech4xComponents</Class>
                 <Class>EliteEquipment</Class>
                 <Class>EliteTools</Class>
                 <Class>EliteWeapons</Class>
@@ -209,7 +207,6 @@
                 <Class>LargeBlocks</Class>
                 <Class>SmallBlocks</Class>
                 <Class>Components</Class>
-                <Class>Tech8xComponents</Class>
                 <Class>EliteEquipment</Class>
                 <Class>EliteTools</Class>
                 <Class>EliteWeapons</Class>
