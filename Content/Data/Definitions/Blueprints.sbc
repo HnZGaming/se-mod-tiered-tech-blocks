@@ -4,46 +4,6 @@
         <Blueprint>
             <Id>
                 <TypeId>BlueprintDefinition</TypeId>
-                <SubtypeId>Tech2x</SubtypeId>
-            </Id>
-            <DisplayName>Common Tech</DisplayName>
-            <Icon>Textures\tech2x.dds</Icon>
-            <Prerequisites>
-                <Item Amount="600" TypeId="Component" SubtypeId="Superconductor"/>
-            </Prerequisites>
-            <Result Amount="1" TypeId="Component" SubtypeId="Tech2x"/>
-            <BaseProductionTimeInSeconds>600</BaseProductionTimeInSeconds>
-        </Blueprint>
-        <Blueprint>
-            <Id>
-                <TypeId>BlueprintDefinition</TypeId>
-                <SubtypeId>Tech4x</SubtypeId>
-            </Id>
-            <DisplayName>Rare Tech</DisplayName>
-            <Icon>Textures\tech4x.dds</Icon>
-            <Prerequisites>
-                <Item Amount="30" TypeId="Component" SubtypeId="Tech2x"/>
-            </Prerequisites>
-            <Result Amount="1" TypeId="Component" SubtypeId="Tech4x"/>
-            <BaseProductionTimeInSeconds>1200</BaseProductionTimeInSeconds>
-        </Blueprint>
-        <Blueprint>
-            <Id>
-                <TypeId>BlueprintDefinition</TypeId>
-                <SubtypeId>Tech8x</SubtypeId>
-            </Id>
-            <DisplayName>Exotic Tech</DisplayName>
-            <Icon>Textures\tech8x.dds</Icon>
-            <Prerequisites>
-                <Item Amount="30" TypeId="Component" SubtypeId="Tech4x"/>
-            </Prerequisites>
-            <Result Amount="1" TypeId="Component" SubtypeId="Tech8x"/>
-            <BaseProductionTimeInSeconds>2400</BaseProductionTimeInSeconds>
-        </Blueprint>
-
-        <Blueprint>
-            <Id>
-                <TypeId>BlueprintDefinition</TypeId>
                 <SubtypeId>AdminOnly</SubtypeId>
             </Id>
             <DisplayName>Admin Only</DisplayName>
