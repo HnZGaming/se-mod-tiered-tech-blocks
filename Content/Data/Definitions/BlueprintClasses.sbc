@@ -98,15 +98,9 @@
     </BlueprintClasses>
 
     <BlueprintClassEntries>
-        <Entry Class="Components" BlueprintSubtypeId="Tech2x" />
-        <Entry Class="Tech2xComponents" BlueprintSubtypeId="Tech2x" />
-        <Entry Class="Tech2xComponents" BlueprintSubtypeId="Tech4x" />
-        <Entry Class="Tech4xComponents" BlueprintSubtypeId="Tech2x" />
-        <Entry Class="Tech4xComponents" BlueprintSubtypeId="Tech4x" />
-        <Entry Class="Tech4xComponents" BlueprintSubtypeId="Tech8x" />
-        <Entry Class="Tech8xComponents" BlueprintSubtypeId="Tech2x" />
-        <Entry Class="Tech8xComponents" BlueprintSubtypeId="Tech4x" />
-        <Entry Class="Tech8xComponents" BlueprintSubtypeId="Tech8x" />
+        <Entry Class="TechAdmin" BlueprintSubtypeId="Tech2x" />
+        <Entry Class="TechAdmin" BlueprintSubtypeId="Tech4x" />
+        <Entry Class="TechAdmin" BlueprintSubtypeId="Tech8x" />
 
         <Entry Class="BasicComponents2" BlueprintSubtypeId="SolarCell" />
         <Entry Class="BasicComponents2" BlueprintSubtypeId="SteelPlate" />
