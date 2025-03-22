@@ -71,7 +71,6 @@ namespace HNZ.TieredTechBlocks
             LoggerManager.SetConfigs(Config.Instance.LogConfigs);
             _techInjector.Update();
             Log.Info("config reloaded");
-            Log.Info(_configFile.ToXml());
         }
 
         protected override void UnloadData()
