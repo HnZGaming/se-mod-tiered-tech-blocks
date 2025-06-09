@@ -31,7 +31,7 @@
             <MaximumAcquisitionAmount>100</MaximumAcquisitionAmount>
 
             <ExtraInventoryTooltipLine>
-                Component required to build tiered-tech blocks. 
+                Component required to build tiered-tech blocks.
                 Type !wiki in the chat for more details.
             </ExtraInventoryTooltipLine>
         </Component>
@@ -93,7 +93,7 @@
             <MaximumOfferAmount>125</MaximumOfferAmount>
             <MinimumOrderAmount>2</MinimumOrderAmount>
             <MaximumOrderAmount>125</MaximumOrderAmount>
-            <CanPlayerOrder>false</CanPlayerOrder>
+            <CanPlayerOrder>true</CanPlayerOrder>
 
             <MinimumAcquisitionAmount>5</MinimumAcquisitionAmount>
             <MaximumAcquisitionAmount>25</MaximumAcquisitionAmount>
