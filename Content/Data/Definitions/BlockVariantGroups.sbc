@@ -152,8 +152,7 @@
               <Block Type="MyObjectBuilder_Reactor" Subtype="SmallBlockSmallGeneratorWarfare2" />
               <Block Type="MyObjectBuilder_Reactor" Subtype="SmallBlockLargeGenerator" />
               <Block Type="MyObjectBuilder_Reactor" Subtype="SmallBlockLargeGeneratorWarfare2" />
-              <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="LargeHydrogenEngine" />
-              <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="SmallHydrogenEngine" />
+
 
               <Block Type="MyObjectBuilder_Reactor" Subtype="LargeBlockSmallGenerator2x" />
               <Block Type="MyObjectBuilder_Reactor" Subtype="LargeBlockSmallGeneratorWarfare22x" />
@@ -163,8 +162,7 @@
               <Block Type="MyObjectBuilder_Reactor" Subtype="SmallBlockSmallGeneratorWarfare22x" />
               <Block Type="MyObjectBuilder_Reactor" Subtype="SmallBlockLargeGenerator2x" />
               <Block Type="MyObjectBuilder_Reactor" Subtype="SmallBlockLargeGeneratorWarfare22x" />
-              <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="LargeHydrogenEngine2x" />
-              <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="SmallHydrogenEngine2x" />
+
 
               <Block Type="MyObjectBuilder_Reactor" Subtype="LargeBlockSmallGenerator4x" />
               <Block Type="MyObjectBuilder_Reactor" Subtype="LargeBlockSmallGeneratorWarfare24x" />
@@ -174,8 +172,7 @@
               <Block Type="MyObjectBuilder_Reactor" Subtype="SmallBlockSmallGeneratorWarfare24x" />
               <Block Type="MyObjectBuilder_Reactor" Subtype="SmallBlockLargeGenerator4x" />
               <Block Type="MyObjectBuilder_Reactor" Subtype="SmallBlockLargeGeneratorWarfare24x" />
-              <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="LargeHydrogenEngine4x" />
-              <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="SmallHydrogenEngine4x" />
+
 
               <Block Type="MyObjectBuilder_Reactor" Subtype="LargeBlockSmallGenerator8x" />
               <Block Type="MyObjectBuilder_Reactor" Subtype="LargeBlockSmallGeneratorWarfare28x" />
@@ -185,9 +182,25 @@
               <Block Type="MyObjectBuilder_Reactor" Subtype="SmallBlockSmallGeneratorWarfare28x" />
               <Block Type="MyObjectBuilder_Reactor" Subtype="SmallBlockLargeGenerator8x" />
               <Block Type="MyObjectBuilder_Reactor" Subtype="SmallBlockLargeGeneratorWarfare28x" />
+
+
+            </Blocks>
+        </BlockVariantGroup>
+
+        <BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="GasGroup" />
+            <Icon>Textures\GUI\Icons\Cubes\HydrogenEngineLarge.dds</Icon>
+            <DisplayName>DisplayName_BlockGroup_EnergyFueledGroup</DisplayName>
+            <Description>Description_BlockGroup_EnergyFueledGroup</Description>
+            <Blocks>
+              <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="LargeHydrogenEngine" />
+              <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="SmallHydrogenEngine" />
+              <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="LargeHydrogenEngine2x" />
+              <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="SmallHydrogenEngine2x" />
+              <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="LargeHydrogenEngine4x" />
+              <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="SmallHydrogenEngine4x" />
               <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="LargeHydrogenEngine8x" />
               <Block Type="MyObjectBuilder_HydrogenEngine" Subtype="SmallHydrogenEngine8x" />
-
             </Blocks>
         </BlockVariantGroup>
 
