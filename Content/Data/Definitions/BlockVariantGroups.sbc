@@ -85,18 +85,16 @@
         </BlockVariantGroup>
 
         <BlockVariantGroup>
-            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="EnergyRenewableGroup" />
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="SolarGroup" />
             <Icon>Textures\GUI\Icons\Cubes\SolarPanel.dds</Icon>
             <DisplayName>DisplayName_BlockGroup_EnergyRenewableGroup</DisplayName>
             <Description>Description_BlockGroup_EnergyRenewableGroup</Description>
             <Blocks>
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockSolarPanel" />
+                <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockSolarPanel" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockColorableSolarPanel" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockColorableSolarPanelCorner" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockColorableSolarPanelCornerInverted" />
-                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbine" />
-                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbineReskin" />
-                <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockSolarPanel" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockColorableSolarPanel" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockColorableSolarPanelCorner" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockColorableSolarPanelCornerInverted" />
@@ -105,8 +103,6 @@
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockColorableSolarPanel2x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockColorableSolarPanelCorner2x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockColorableSolarPanelCornerInverted2x" />
-                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbine2x" />
-                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbineReskin2x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockSolarPanel2x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockColorableSolarPanel2x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockColorableSolarPanelCorner2x" />
@@ -116,8 +112,6 @@
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockColorableSolarPanel4x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockColorableSolarPanelCorner4x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockColorableSolarPanelCornerInverted4x" />
-                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbine4x" />
-                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbineReskin4x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockSolarPanel4x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockColorableSolarPanel4x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockColorableSolarPanelCorner4x" />
@@ -127,14 +121,31 @@
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockColorableSolarPanel8x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockColorableSolarPanelCorner8x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="LargeBlockColorableSolarPanelCornerInverted8x" />
-                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbine8x" />
-                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbineReskin8x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockSolarPanel8x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockColorableSolarPanel8x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockColorableSolarPanelCorner8x" />
                 <Block Type="MyObjectBuilder_SolarPanel" Subtype="SmallBlockColorableSolarPanelCornerInverted8x" />
 
+            </Blocks>
+        </BlockVariantGroup>
 
+        <BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="WindTurbineGroup" />
+            <Icon>Textures\GUI\Icons\Cubes\WindTurbine.dds</Icon>
+            <DisplayName>DisplayName_Block_WindTurbine</DisplayName>
+            <Description>Description_WindTurbine</Description>
+            <Blocks>
+                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbine" />
+                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbineReskin" />
+
+                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbine2x" />
+                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbineReskin2x" />
+    
+                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbine4x" />
+                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbineReskin4x" />
+
+                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbine8x" />
+                <Block Type="MyObjectBuilder_WindTurbine" Subtype="LargeBlockWindTurbineReskin8x" />
             </Blocks>
         </BlockVariantGroup>
 
