@@ -466,10 +466,12 @@
                 <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockSmallThrust" />
                 <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockLargeThrust" />
                 <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockSmallThrust" />
+
                 <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockLargeThrustSciFi" />
                 <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockSmallThrustSciFi" />
                 <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockLargeThrustSciFi" />
                 <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockSmallThrustSciFi" />
+
                 <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockLargeModularThruster" />
                 <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockSmallModularThruster" />
                 <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockLargeModularThruster" />
@@ -489,6 +491,36 @@
                 <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockSmallThrust8x" />
                 <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockLargeThrust8x" />
                 <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockSmallThrust8x" />
+
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockLargeThrustSciFi2x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockSmallThrustSciFi2x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockLargeThrustSciFi2x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockSmallThrustSciFi2x" />
+
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockLargeThrustSciFi4x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockSmallThrustSciFi4x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockLargeThrustSciFi4x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockSmallThrustSciFi4x" />
+
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockLargeThrustSciFi8x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockSmallThrustSciFi8x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockLargeThrustSciFi8x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockSmallThrustSciFi8x" />
+
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockSmallModularThruster2x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockLargeModularThruster2x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockSmallModularThruster2x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockLargeModularThruster2x" />
+
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockSmallModularThruster4x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockLargeModularThruster4x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockSmallModularThruster4x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockLargeModularThruster4x" />
+
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockSmallModularThruster8x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallBlockLargeModularThruster8x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockSmallModularThruster8x" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeBlockLargeModularThruster8x" />
 
             </Blocks>
         </BlockVariantGroup>
